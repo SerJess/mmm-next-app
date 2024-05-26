@@ -10,7 +10,7 @@ const LogoTable = () => (
 		<div className="img-wrapper">
 			<div className="glow" />
 			<div className="img-con">
-				<Image src={mmmImg} alt={""} width={320} />
+				<Image src={mmmImg} alt={""} width={320} priority={true} />
 			</div>
 		</div>
 	</div>

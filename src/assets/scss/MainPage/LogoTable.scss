@@ -4,16 +4,6 @@
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		animation: logo-show 1.5s ease-in-out forwards;
-		@keyframes logo-show {
-			0% {
-				transform: translateY(-100%);
-			}
-
-			100% {
-				transform: translateY(0);
-			}
-		}
 
 		.img-wrapper {
 			position: relative;

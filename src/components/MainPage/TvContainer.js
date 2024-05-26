@@ -15,9 +15,9 @@ const Lottie = dynamic(() => import("lottie-react").then((module) => module), { 
 const TvContainer = () => (
 	<div className="tv-con">
 		<div className="tv-img-con">
-			<Image src={tvImg} alt={""} width={359} height={230} />
+			<Image src={tvImg} alt={""} width={359} height={230} priority={true} />
 			<div className="triangle-con">
-				<Lottie animationData={triangleGreen} loop={false} />
+				<Lottie animationData={triangleGreen} loop={true} />
 			</div>
 			<div className="boost-btn">
 				<Image src={boostBtnImg} alt={""} width={66} height={66} />

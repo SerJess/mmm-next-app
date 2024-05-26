@@ -27,7 +27,7 @@ const navItems = [
 	},
 ];
 const NavPanel = ({ setActiveTab }) => (
-	<div className="wide-con">
+	<div className="nav-panel-wrapper wide-con">
 		<div className="nav-panel-con">
 			{navItems.map((item) => (
 				<div key={item.id} className="nav-item" onClick={() => setActiveTab(item.id)}>
