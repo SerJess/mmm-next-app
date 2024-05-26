@@ -1,0 +1,40 @@
+/* stylelint-disable selector-id-pattern */
+
+@import "./vendor/bootstrap.css";
+
+@font-face {
+	font-family: BeerMoney;
+	src: url("../fonts/BeerMoney/BeerMoney.ttf") format("woff");
+	font-weight: 400;
+	font-display: fallback;
+}
+
+body {
+	font-family: BeerMoney, sans-serif;
+	color: #000;
+	font-size: 16px;
+	white-space: normal;
+	background-color: #fff;
+	overflow: hidden;
+}
+
+html,
+body,
+#__next,
+#next-app,
+.wrapper,
+.main-body,
+.content {
+	height: 100%;
+	width: 100%;
+}
+
+p {
+	margin-bottom: 0;
+}
+
+img {
+	max-width: 100%;
+	aspect-ratio: attr(width) / attr(height);
+	height: auto;
+}

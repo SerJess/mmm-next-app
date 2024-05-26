@@ -1,0 +1,19 @@
+.main-page-con {
+	.nav-panel-con {
+		display: flex;
+		justify-content: space-around;
+		padding: 15px 15px 30px;
+
+		.nav-item {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #009a02;
+			border: 2px solid #016b0240;
+			box-shadow: 0 2px 2.5px #016b02;
+			width: 64px;
+			height: 44px;
+			border-radius: 10px;
+		}
+	}
+}

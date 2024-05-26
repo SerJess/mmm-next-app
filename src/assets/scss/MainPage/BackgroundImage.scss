@@ -1,0 +1,17 @@
+.main-page-con {
+	.bg-carousel-by-level {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+
+		.slide,
+		.carousel-inner,
+		.custom-tag,
+		.img-con {
+			width: 100%;
+			height: 100%;
+		}
+	}
+}

@@ -1,0 +1,79 @@
+.main-page-con {
+	.claim-btn-con {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		padding: 0 15px;
+
+		.claim-btn {
+			padding: 12px 24px;
+			width: 100%;
+			background-color: #009a02;
+			font-size: 20px;
+			line-height: 24.7px;
+			color: #fff;
+			text-align: center;
+			border: 2px solid #016b0240;
+			box-shadow: 0 2px 2.5px #016b02;
+			border-radius: 10px;
+		}
+	}
+}
+
+.claim-confirmation-modal {
+	margin: 0;
+	height: 100%;
+	min-width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.modal-content {
+		background-color: unset;
+		border: none;
+		padding: 0 15px;
+		margin: 0 auto;
+		max-width: 600px;
+	}
+
+	.claim-confirmation-con {
+		padding: 16px;
+		border: 1px solid #009902;
+		background-color: #dedede;
+		border-radius: 10px;
+
+		.descr {
+			margin-bottom: 32px;
+			font-size: 32px;
+			line-height: 39.52px;
+			text-align: center;
+		}
+
+		.btns-con {
+			display: flex;
+			justify-content: space-between;
+
+			.btn-item {
+				padding: 10px;
+				width: 48%;
+				font-size: 20px;
+				line-height: 24.7px;
+				text-align: center;
+				border-radius: 10px;
+				color: white;
+
+				&.confirm-btn {
+					background-color: #009a02;
+					border: 2px solid #016b0240;
+					box-shadow: 0 2px 2.5px #016b02;
+				}
+
+				&.cancel-btn {
+					background-color: #f00000;
+					border: 2px solid #94000040;
+					box-shadow: 0 2px 2.5px #940000;
+				}
+			}
+		}
+	}
+}

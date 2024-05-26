@@ -1,0 +1,73 @@
+.main-page-con {
+	.stats-carousel-by-level {
+		position: relative;
+		display: flex;
+		margin-bottom: 20px;
+		width: 100%;
+		max-width: 600px;
+
+		.stats-bg {
+			width: 100%;
+		}
+
+		.users-stats-con {
+			position: absolute;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100%;
+			width: 100%;
+			left: 0;
+			top: 0;
+			padding: 0 15px;
+			z-index: 2;
+			color: #dedede;
+
+			.level-con {
+				margin-bottom: 8px;
+				font-size: 24px;
+				font-weight: 400;
+				line-height: 29.64px;
+				text-shadow: 0 4px 4px #00000040;
+			}
+
+			.score-con {
+				margin-bottom: 8px;
+				display: flex;
+				justify-content: center;
+				width: 100%;
+				border-radius: 10px;
+				background-color: #dedede;
+				color: #009a02;
+				font-size: 128px;
+				line-height: 0.9;
+				text-shadow: 0 6px 4px #0000004d;
+				border: 2px solid #b1b1b1;
+				box-shadow: 4px 4px 16px 0 #00000040;
+			}
+
+			.timer-con {
+				margin-bottom: 10px;
+				display: flex;
+				font-size: 16px;
+				line-height: 19.76px;
+				text-shadow: 0 4px 4px #00000040;
+
+				.diff-color {
+					margin-left: 5px;
+				}
+			}
+
+			.per-hour {
+				font-size: 16px;
+				line-height: 19.76px;
+				text-shadow: 0 4px 4px #00000040;
+			}
+
+			.diff-color {
+				color: #009a02;
+			}
+		}
+	}
+}

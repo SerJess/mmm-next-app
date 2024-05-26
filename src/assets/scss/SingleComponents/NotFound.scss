@@ -1,0 +1,7 @@
+.not-found-container {
+	text-align: center;
+	padding: 60px 0 100px;
+	@media screen and (width >= 992px) {
+		padding: 60px 0 290px;
+	}
+}

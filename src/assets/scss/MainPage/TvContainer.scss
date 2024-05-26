@@ -1,0 +1,35 @@
+.main-page-con {
+	.tv-con {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin-bottom: 16px;
+		padding: 0 15px;
+		width: 100%;
+		max-width: 600px;
+
+		.tv-img-con {
+			display: flex;
+			justify-content: center;
+			margin: 0 auto;
+			position: relative;
+			overflow: hidden;
+			width: fit-content;
+
+			.triangle-con {
+				position: absolute;
+				top: -42%;
+				left: -13%;
+				width: 115%;
+				height: 115%;
+				pointer-events: none;
+			}
+
+			.boost-btn {
+				position: absolute;
+				top: 15%;
+				left: 63%;
+			}
+		}
+	}
+}
