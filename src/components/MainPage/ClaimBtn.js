@@ -4,6 +4,8 @@ import { useTranslation } from "next-i18next";
 import dayjs from "dayjs";
 
 import "../../assets/scss/MainPage/ClaimBtn.scss";
+import fetchWithToken from "../../helpers/fetchWithToken";
+import { toast } from "react-toastify";
 
 const ClaimBtn = () => {
 	const { t } = useTranslation("common");
@@ -32,6 +34,27 @@ const ClaimBtn = () => {
 		};
 	});
 
+	const postClaim = async () => {
+		if (!isAvailAbleToClaim) {
+			return false;
+		}
+		try {
+			setIsAvailAbleToClaim(false);
+
+			// TODO add refetch balance
+			const { success, error } = await fetchWithToken("/points/convert", { method: "POST" });
+
+			if (!success || error?.message) {
+				return toast.error(error?.message || "Something went wrong");
+			}
+
+			return true;
+		} catch (e) {
+			console.error(e);
+		}
+		return false;
+	};
+
 	return (
 		<>
 			<div className="claim-btn-con">
@@ -43,7 +66,9 @@ const ClaimBtn = () => {
 				<div className="claim-confirmation-con">
 					<p className="descr">{content.confirmation}</p>
 					<div className="btns-con">
-						<div className={`btn-item confirm-btn${isAvailAbleToClaim ? "" : " disabled"}`}>{content.yes}</div>
+						<div className={`btn-item confirm-btn${isAvailAbleToClaim ? "" : " disabled"}`} onClick={postClaim}>
+							{content.yes}
+						</div>
 						<div className="btn-item cancel-btn" onClick={() => setIsConfirmModal(false)}>
 							{content.no}
 						</div>

@@ -24,7 +24,7 @@ export const mainSlice = createSlice({
 			state.isMobile = action.payload;
 		},
 		setUser: (state, action) => {
-			state.user = action.payload;
+			state.user = { ...state.user, ...action.payload };
 		},
 	},
 });
