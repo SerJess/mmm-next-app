@@ -20,7 +20,7 @@ const Achievements = ({ closeTab }) => {
 		try {
 			setIsLoading(true);
 
-			// TODO: fetch achievements from the server
+			// TODO: fetch achievements
 			await new Promise((resolve) => setTimeout(resolve, 1000));
 
 			setItems([

@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import { toast } from "react-toastify";
+
+import LoaderResponsive from "../SingleComponents/LoaderResponsive";
+import { useAppSelector } from "../../redux";
+import fetchWithToken from "../../helpers/fetchWithToken";
 
 import tableBigImg from "../../assets/img/MainPage/tableBig.png";
 import referralsImg from "../../assets/img/MainPage/referrals.png";
 
 import "../../assets/scss/MainPage/Referrals.scss";
-import LoaderResponsive from "../SingleComponents/LoaderResponsive";
 
 const COMMON_REF = "+1,500 $MMM ";
 const PREMIUM_REF = "+10,500 $MMM ";
@@ -16,32 +20,30 @@ const Referrals = ({ closeTab }) => {
 	const { t } = useTranslation("common");
 	const content = t("content.referrals", { returnObjects: true });
 
-	const [isLoading, setIsLoading] = useState(true);
-	const [stats, setStats] = useState([]);
+	const usersRefLink = useAppSelector((state) => state.main.user.referralCode);
 
-	const usersRefLink = "my-ref";
+	const [isLoading, setIsLoading] = useState(true);
+	const [stats, setStats] = useState({});
+
 	const getShareLink = () => `https://t.me/share/url?url=${usersRefLink}&text=${textForDm}`;
 
 	const fetchStats = async () => {
 		try {
 			setIsLoading(true);
 
-			// TODO: fetch achievements from the server
-			await new Promise((resolve) => setTimeout(resolve, 1000));
+			const { success, data, error } = await fetchWithToken("/users/referrals");
 
-			setStats({
-				0: 1,
-				1: 2,
-				2: 3,
-				3: 4,
-				4: 5,
-				5: 6,
-				6: 7,
-			});
+			if (!success || error?.message) {
+				return toast.error(error?.message || "Something went wrong");
+			}
+
+			// TODO return grouped by level - data: {1:100, 2: 200...}
+			setStats(data);
 			setIsLoading(false);
 		} catch (e) {
 			console.error(e);
 		}
+		return false;
 	};
 
 	useEffect(() => {

@@ -4,6 +4,8 @@ import Router from "next/router";
 import { parse } from "next-useragent";
 import { appWithTranslation } from "next-i18next";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
+import { setCookie } from "cookies-next";
+import { ToastContainer } from "react-toastify";
 
 import { setIsMobile } from "../redux/slices/main";
 import { store } from "../redux";
@@ -14,6 +16,7 @@ import HelmetComponent from "../components/SingleComponents/HelmetComponent";
 import { TelegramProvider } from "../components/NextComponets/TelegramProvider";
 
 import "../assets/scss/main.scss";
+import "react-toastify/dist/ReactToastify.css";
 
 class WebApp extends App {
 	constructor(props) {
@@ -63,6 +66,7 @@ class WebApp extends App {
 								</div>
 							)}
 						</div>
+						<ToastContainer />
 					</StoreProvider>
 				</TonConnectUIProvider>
 			</TelegramProvider>
@@ -80,6 +84,13 @@ WebApp.getInitialProps = async (context) => {
 		ua = parse(ctx.req.headers["user-agent"]);
 	} else {
 		ua = { isMobile: window.innerWidth < 992, isTablet: window.innerWidth < 768 };
+	}
+
+	const { accessToken, refreshToken } = ctx.query;
+
+	if (accessToken || refreshToken) {
+		await setCookie("accessToken", accessToken, { ...ctx, domain: process.env.APP_DOMAIN });
+		await setCookie("refreshToken", refreshToken, { ...ctx, domain: process.env.APP_DOMAIN });
 	}
 
 	if (isSSR) {

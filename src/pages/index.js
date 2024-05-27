@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { toast } from "react-toastify";
 
 import getSEOOptions from "../helpers/getSEOOptions";
+import fetchWithToken from "../helpers/fetchWithToken";
+import { useAppDispatch } from "../redux";
+import { setUser } from "../redux/slices/main";
 
 import LogoTable from "../components/MainPage/LogoTable";
 import BackgroundImage from "../components/MainPage/BackgroundImage";
@@ -13,32 +17,85 @@ import Leaderboard from "../components/MainPage/Leaderboard";
 import Settings from "../components/MainPage/settings/Settings";
 import Referrals from "../components/MainPage/Referrals";
 import Achievements from "../components/MainPage/Achievements";
+import Loader from "../components/SingleComponents/Loader";
 
 import "../assets/scss/MainPage/main.scss";
 
 const Index = () => {
-	const [activeTab, setActiveTab] = React.useState("");
+	const dispatch = useAppDispatch();
+	const [activeTab, setActiveTab] = useState("");
+	const [isLoading, setIsLoading] = useState(true);
+
+	const getUser = async () => {
+		try {
+			const { success, data, error } = await fetchWithToken("/users");
+
+			if (!success || error?.message) {
+				return toast.error(error?.message || "Something went wrong");
+			}
+
+			return data;
+		} catch (e) {
+			console.error(e);
+		}
+		return false;
+	};
+
+	const getUserIncome = async () => {
+		try {
+			const { success, data, error } = await fetchWithToken("/users/income");
+
+			if (!success || error?.message) {
+				return toast.error(error?.message || "Something went wrong");
+			}
+
+			return data || 0;
+		} catch (e) {
+			console.error(e);
+		}
+		return false;
+	};
+
+	const fetchUserDataAsync = async () => {
+		setIsLoading(true);
+		const [user, income] = await Promise.all([getUser(), getUserIncome()]);
+
+		if (user) {
+			dispatch(setUser({ ...user, income }));
+			setIsLoading(false);
+		}
+	};
+
+	useEffect(() => {
+		fetchUserDataAsync();
+	}, []);
+
 	return (
-		<div className="main-page-con">
-			<BackgroundImage />
-			<div className="page-content-con">
-				<div className="main-screen-con">
-					{!activeTab && (
-						<>
-							<LogoTable />
-							<UsersStats />
-							<TvContainer />
-							<ClaimBtn />
-						</>
-					)}
-					{activeTab === "leaderboard" && <Leaderboard closeTab={() => setActiveTab("")} />}
-					{activeTab === "settings" && <Settings closeTab={() => setActiveTab("")} />}
-					{activeTab === "referrals" && <Referrals closeTab={() => setActiveTab("")} />}
-					{activeTab === "achievements" && <Achievements closeTab={() => setActiveTab("")} />}
+		<>
+			{isLoading && <Loader />}
+			{!isLoading && (
+				<div className="main-page-con">
+					<BackgroundImage />
+					<div className="page-content-con">
+						<div className="main-screen-con">
+							{!activeTab && (
+								<>
+									<LogoTable />
+									<UsersStats />
+									<TvContainer />
+									<ClaimBtn />
+								</>
+							)}
+							{activeTab === "leaderboard" && <Leaderboard closeTab={() => setActiveTab("")} />}
+							{activeTab === "settings" && <Settings closeTab={() => setActiveTab("")} />}
+							{activeTab === "referrals" && <Referrals closeTab={() => setActiveTab("")} />}
+							{activeTab === "achievements" && <Achievements closeTab={() => setActiveTab("")} />}
+						</div>
+						<NavPanel setActiveTab={setActiveTab} />
+					</div>
 				</div>
-				<NavPanel setActiveTab={setActiveTab} />
-			</div>
-		</div>
+			)}
+		</>
 	);
 };
 

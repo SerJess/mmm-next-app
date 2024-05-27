@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { setCookie } from "cookies-next";
 import Image from "next/image";
 
+import { useTelegram } from "../../NextComponets/TelegramProvider";
+
 import tgLogoImg from "../../../assets/img/MainPage/settings/tgLogo.png";
 import twitterLogoImg from "../../../assets/img/MainPage/settings/twitterLogo.png";
 
@@ -47,18 +49,29 @@ const SocialsModal = ({ isOpen, close }) => {
 	const { t } = useTranslation("common");
 	const content = t("content.settings", { returnObjects: true });
 
+	const { webApp } = useTelegram();
+
+	// TODO ADD LINKS TO SOCIALS
+	const openTelegram = () => {
+		webApp.openTelegramLink("https://t.me/durov");
+	};
+
+	const openLink = () => {
+		webApp.openLink("https://x.com/durov");
+	};
+
 	return (
 		<Modal isOpen={isOpen} toggle={close} className="custom-settings-modal">
 			<div className="settings-modal-con">
 				<p className="descr">{content.socials}</p>
 				<div className="btns-con">
-					<div className="btn-item confirm-btn">
+					<div className="btn-item confirm-btn" onClick={openTelegram}>
 						<div className="icon-con">
 							<Image src={tgLogoImg} alt={""} width={24} height={20} />
 						</div>
 						{content.telegram}
 					</div>
-					<div className="btn-item confirm-btn">
+					<div className="btn-item confirm-btn" onClick={openLink}>
 						<div className="icon-con">
 							<Image src={twitterLogoImg} alt={""} width={20} height={18} />
 						</div>

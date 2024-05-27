@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import { useAppSelector } from "../../redux";
+
+import decimalAdjust from "../../helpers/decimalAdjust";
 
 import LoaderResponsive from "../SingleComponents/LoaderResponsive";
 
@@ -13,16 +16,19 @@ import "../../assets/scss/MainPage/Leaderboard.scss";
 const Leaderboard = ({ closeTab }) => {
 	const { t } = useTranslation("common");
 	const content = t("content.leaderboard", { returnObjects: true });
+	const referralCounter = useAppSelector((state) => state.main.user.referralCounter);
+	const balance = useAppSelector((state) => state.main.user.balance);
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [users, setUsers] = useState([]);
 	const [user, setUser] = useState([]);
+	const totalUsers = 23123;
 
 	const fetchLeaderboard = async () => {
 		try {
 			setIsLoading(true);
 
-			// TODO: fetch fetchLeaderboard from the server
+			// TODO: fetch fetchLeaderboard, user position, total users count, and list
 			await new Promise((resolve) => setTimeout(resolve, 1000));
 
 			setUser({
@@ -106,16 +112,16 @@ const Leaderboard = ({ closeTab }) => {
 									<div className="icon-con">
 										<Image src={referralsGreenImg} alt={""} width={25} height={25} />
 									</div>
-									123123
+									{referralCounter}
 								</div>
 							</div>
 							<div className="stats-item">
 								<div className="descr">{content.amount}</div>
-								<div className="descr">213213</div>
+								<div className="descr">{decimalAdjust(+balance / 10000, 4)}</div>
 							</div>
 							<div className="stats-item">
 								<div className="descr">{content.totalUsers}</div>
-								<div className="descr">23123</div>
+								<div className="descr">{totalUsers}</div>
 							</div>
 						</div>
 						<div className="bordered-white users-list">

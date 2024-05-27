@@ -3,6 +3,10 @@ import { Carousel, CarouselItem } from "reactstrap";
 import Image from "next/image";
 import Countdown, { zeroPad } from "react-countdown";
 import { useTranslation } from "next-i18next";
+import dayjs from "dayjs";
+
+import { useAppSelector } from "../../redux";
+import decimalAdjust from "../../helpers/decimalAdjust";
 
 import level1Img from "../../assets/img/MainPage/tables/level1.png";
 import level2Img from "../../assets/img/MainPage/tables/level2.png";
@@ -15,22 +19,31 @@ import level7Img from "../../assets/img/MainPage/tables/level7.png";
 import "../../assets/scss/MainPage/UsersStats.scss";
 
 const imagesByLevel = {
-	0: level1Img,
-	1: level2Img,
-	2: level3Img,
-	3: level4Img,
-	4: level5Img,
-	5: level6Img,
-	6: level7Img,
+	0: level7Img,
+	7: level1Img,
+	6: level2Img,
+	5: level3Img,
+	4: level4Img,
+	3: level5Img,
+	2: level6Img,
+	1: level7Img,
 };
 
 const UsersStats = () => {
 	const { t } = useTranslation("common");
 	const content = t("content.stats", { returnObjects: true });
 
-	const level = 1;
-	const score = 1123123;
-	const perHour = 120;
+	const referralLevel = useAppSelector((state) => state.main.user.referralLevel);
+	const balance = useAppSelector((state) => state.main.user.balance);
+	const income = useAppSelector((state) => state.main.user.income);
+
+	const level = +Object.keys(imagesByLevel).indexOf(`${referralLevel}`);
+
+	const score = decimalAdjust(+balance / 10000, 4);
+	const perHour = decimalAdjust(+income / 10000, 4);
+
+	// TODO add displaying $MMM and points
+
 	return (
 		<div className="stats-carousel-by-level">
 			<div className="stats-bg">
@@ -53,12 +66,12 @@ const UsersStats = () => {
 				<div className="timer-con">
 					{content.toDrops}
 					<Countdown
-						date={Date.now() + 1000 * 60 * 60 * 24}
+						date={dayjs().endOf("hour").toDate()}
 						zeroPadTime={2}
 						daysInHours={true}
-						renderer={({ formatted: { hours, minutes, seconds } }) => (
+						renderer={({ formatted: { minutes, seconds } }) => (
 							<div className="diff-color">
-								{zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
+								{zeroPad(minutes)}:{zeroPad(seconds)}
 							</div>
 						)}
 					/>

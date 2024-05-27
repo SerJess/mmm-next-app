@@ -16,6 +16,10 @@
 			border: 2px solid #016b0240;
 			box-shadow: 0 2px 2.5px #016b02;
 			border-radius: 10px;
+
+			&.disabled {
+				opacity: 0.5;
+			}
 		}
 	}
 }
@@ -66,6 +70,10 @@
 					background-color: #009a02;
 					border: 2px solid #016b0240;
 					box-shadow: 0 2px 2.5px #016b02;
+
+					&.disabled {
+						opacity: 0.5;
+					}
 				}
 
 				&.cancel-btn {
