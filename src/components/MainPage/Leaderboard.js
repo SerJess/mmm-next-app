@@ -10,6 +10,7 @@ import LoaderResponsive from "../SingleComponents/LoaderResponsive";
 import leaderboardImg from "../../assets/img/MainPage/leaderboard.png";
 import referralsGreenImg from "../../assets/img/MainPage/referralsGreen.png";
 import tableBigImg from "../../assets/img/MainPage/tableBig.png";
+import userImg from "../../assets/img/MainPage/user.png";
 
 import "../../assets/scss/MainPage/Leaderboard.scss";
 
@@ -29,7 +30,6 @@ const Leaderboard = ({ closeTab }) => {
 			setIsLoading(true);
 
 			// TODO: fetch fetchLeaderboard, user position, total users count, and list
-			await new Promise((resolve) => setTimeout(resolve, 1000));
 
 			setUser({
 				place: 111,
@@ -44,7 +44,6 @@ const Leaderboard = ({ closeTab }) => {
 					amount: 12312412,
 				},
 				{
-					avatarUrl: "https://avatars.cloudflare.steamstatic.com/6a991cedbf9caf7e0dfd32c5f17f13820c818bf8_full.jpg",
 					name: "asdasda",
 					amount: 12312412,
 				},
@@ -131,7 +130,7 @@ const Leaderboard = ({ closeTab }) => {
 									<div key={`global-user${i}`} className={`list-item${i < 3 ? " bordered-green" : ""}`}>
 										<div className="main-wrap">
 											<div className="place">#{i + 1}</div>
-											<div className="avatar-con" style={{ backgroundImage: `url(${item?.avatarUrl})` }} />
+											<div className="avatar-con" style={{ backgroundImage: `url(${item?.avatarUrl || userImg.src})` }} />
 											<div className="name">{item.name}</div>
 										</div>
 										<div className="amount">{item.amount}</div>
@@ -141,7 +140,7 @@ const Leaderboard = ({ closeTab }) => {
 							<div className={"list-item"}>
 								<div className="main-wrap">
 									<div className="place">#{100}</div>
-									<div className="avatar-con" style={{ backgroundImage: `url(${user?.avatarUrl})` }} />
+									<div className="avatar-con" style={{ backgroundImage: `url(${user?.avatarUrl || userImg.src})` }} />
 									<div className="name">{content.you}</div>
 								</div>
 								<div className="amount">{user.amount}</div>

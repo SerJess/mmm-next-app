@@ -65,8 +65,8 @@ class WebApp extends App {
 									</div>
 								</div>
 							)}
+							<ToastContainer />
 						</div>
-						<ToastContainer />
 					</StoreProvider>
 				</TonConnectUIProvider>
 			</TelegramProvider>

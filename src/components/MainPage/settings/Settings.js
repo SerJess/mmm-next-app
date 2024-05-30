@@ -54,6 +54,7 @@ const Settings = ({ closeTab }) => {
 		} catch (e) {
 			console.error(e);
 		}
+		return true;
 	};
 
 	useEffect(() => {

@@ -50,7 +50,6 @@
 					.title {
 						margin-bottom: 8px;
 						font-size: 32px;
-						line-height: 39.52px;
 						text-align: center;
 					}
 
@@ -66,8 +65,14 @@
 						border: 1px solid #000;
 						width: 100%;
 
+						.descr {
+							line-height: 1;
+						}
+
 						.descr-reward {
 							color: #009a02;
+							white-space: nowrap;
+							margin-left: 10px;
 						}
 
 						&:last-child {

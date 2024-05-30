@@ -27,6 +27,18 @@
 			text-align: center;
 		}
 
+		.descr-sub {
+			margin-bottom: 32px;
+			font-size: 20px;
+			line-height: 24.7px;
+			text-align: center;
+
+			.diff-color {
+				margin-left: 5px;
+				color: #009902;
+			}
+		}
+
 		.btns-con {
 			display: flex;
 			justify-content: space-between;

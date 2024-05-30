@@ -34,15 +34,13 @@ const UsersStats = () => {
 	const content = t("content.stats", { returnObjects: true });
 
 	const referralLevel = useAppSelector((state) => state.main.user.referralLevel);
-	const balance = useAppSelector((state) => state.main.user.balance);
+	const balance = useAppSelector((state) => state.main.user.points);
 	const income = useAppSelector((state) => state.main.user.income);
 
 	const level = +Object.keys(imagesByLevel).indexOf(`${referralLevel}`);
 
-	const score = decimalAdjust(+balance / 10000, 4);
-	const perHour = decimalAdjust(+income / 10000, 4);
-
-	// TODO add displaying $MMM and points
+	const score = decimalAdjust(+balance / 100, 4);
+	const perHour = decimalAdjust(+income / 100, 4);
 
 	return (
 		<div className="stats-carousel-by-level">

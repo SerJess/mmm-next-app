@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { toast } from "react-toastify";
 
@@ -20,19 +20,29 @@ import Achievements from "../components/MainPage/Achievements";
 import Loader from "../components/SingleComponents/Loader";
 
 import "../assets/scss/MainPage/main.scss";
+import { NewLevelModal } from "../components/MainPage/settings/SettingsModals";
 
 const Index = () => {
 	const dispatch = useAppDispatch();
+	const refetchIncome = useRef();
+
 	const [activeTab, setActiveTab] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
+	const [isNewLevel, setIsNewLevel] = useState(false);
 
 	const getUser = async () => {
 		try {
 			const { success, data, error } = await fetchWithToken("/users");
 
-			if (!success || error?.message) {
+			if (!success || error?.message || !data) {
 				return toast.error(error?.message || "Something went wrong");
 			}
+
+			const prevLevel = localStorage.getItem(`prevLevel-${data.chatId}`);
+			if (prevLevel && `${prevLevel}` !== `${data.referralLevel}`) {
+				setIsNewLevel(true);
+			}
+			localStorage.setItem(`prevLevel-${data.chatId}`, `${data.referralLevel}`);
 
 			return data;
 		} catch (e) {
@@ -63,11 +73,21 @@ const Index = () => {
 		if (user) {
 			dispatch(setUser({ ...user, income }));
 			setIsLoading(false);
+			refetchIncome.current = setInterval(async () => {
+				const newIncome = await getUserIncome();
+				if (newIncome) {
+					dispatch(setUser({ income: newIncome }));
+				}
+			}, 10000);
 		}
 	};
 
 	useEffect(() => {
 		fetchUserDataAsync();
+
+		return () => {
+			clearInterval(refetchIncome.current);
+		};
 	}, []);
 
 	return (
@@ -84,6 +104,7 @@ const Index = () => {
 									<UsersStats />
 									<TvContainer />
 									<ClaimBtn />
+									<NewLevelModal isOpen={isNewLevel} close={() => setIsNewLevel(false)} />
 								</>
 							)}
 							{activeTab === "leaderboard" && <Leaderboard closeTab={() => setActiveTab("")} />}

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "reactstrap";
 import { useTranslation } from "next-i18next";
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
+
+import fetchWithToken from "../../helpers/fetchWithToken";
 
 import "../../assets/scss/MainPage/ClaimBtn.scss";
-import fetchWithToken from "../../helpers/fetchWithToken";
-import { toast } from "react-toastify";
 
 const ClaimBtn = () => {
 	const { t } = useTranslation("common");

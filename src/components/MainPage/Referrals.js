@@ -9,6 +9,8 @@ import fetchWithToken from "../../helpers/fetchWithToken";
 
 import tableBigImg from "../../assets/img/MainPage/tableBig.png";
 import referralsImg from "../../assets/img/MainPage/referrals.png";
+import friendImg from "../../assets/img/MainPage/settings/friend.png";
+import premiumImg from "../../assets/img/MainPage/settings/premium.png";
 
 import "../../assets/scss/MainPage/Referrals.scss";
 
@@ -70,7 +72,9 @@ const Referrals = ({ closeTab }) => {
 							<p className="title">{content.title}</p>
 							<div className="ref-info-con">
 								<div className="referral-item">
-									<div className="img-con"></div>
+									<div className="img-con">
+										<Image src={friendImg} alt={""} width={32} height={32} />
+									</div>
 									<div className="descr-con">
 										<p className="descr-main">{content.invite}</p>
 										<p className="descr">
@@ -80,7 +84,9 @@ const Referrals = ({ closeTab }) => {
 									</div>
 								</div>
 								<div className="referral-item">
-									<div className="img-con"></div>
+									<div className="img-con">
+										<Image src={premiumImg} alt={""} width={32} height={32} />
+									</div>
 									<div className="descr-con">
 										<p className="descr-main">{content.premium}</p>
 										<p className="descr">

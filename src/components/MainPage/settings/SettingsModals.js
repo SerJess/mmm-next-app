@@ -11,6 +11,7 @@ import tgLogoImg from "../../../assets/img/MainPage/settings/tgLogo.png";
 import twitterLogoImg from "../../../assets/img/MainPage/settings/twitterLogo.png";
 
 import "../../../assets/scss/MainPage/SettingsModals.scss";
+import { useAppSelector } from "../../../redux";
 
 const LanguageModal = ({ isOpen, close }) => {
 	const { t, i18n } = useTranslation("common");
@@ -99,4 +100,25 @@ const SupportModal = ({ isOpen, close }) => {
 	);
 };
 
-export { LanguageModal, SocialsModal, SupportModal };
+const NewLevelModal = ({ isOpen, close }) => {
+	const { t } = useTranslation("common");
+	const content = t("content.settings", { returnObjects: true });
+	const referralLevel = useAppSelector((state) => state.main.user.referralLevel);
+
+	return (
+		<Modal isOpen={isOpen} className="custom-settings-modal">
+			<div className="settings-modal-con">
+				<p className="descr mb-2">{content.newLevel}</p>
+				<p className="descr-sub">
+					{content.yourStatus}
+					<span className="diff-color">{content.levels[referralLevel].toLowerCase()}</span>
+				</p>
+				<div className="btns-con" onClick={close}>
+					<div className="btn-item confirm-btn wide">{content.continue}</div>
+				</div>
+			</div>
+		</Modal>
+	);
+};
+
+export { LanguageModal, SocialsModal, SupportModal, NewLevelModal };
