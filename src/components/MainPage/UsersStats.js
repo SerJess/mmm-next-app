@@ -36,6 +36,7 @@ const UsersStats = () => {
 	const referralLevel = useAppSelector((state) => state.main.user.referralLevel);
 	const balance = useAppSelector((state) => state.main.user.points);
 	const income = useAppSelector((state) => state.main.user.income);
+	const isBoosted = useAppSelector((state) => state.main.user.usedBoost);
 
 	const level = +Object.keys(imagesByLevel).indexOf(`${referralLevel}`);
 
@@ -75,6 +76,7 @@ const UsersStats = () => {
 					/>
 				</div>
 				<div className="per-hour">
+					{isBoosted && "x2 "}
 					<span className="diff-color">{perHour}</span> {content.perHour}
 				</div>
 			</div>
