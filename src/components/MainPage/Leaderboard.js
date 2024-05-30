@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
-import { useAppSelector } from "../../redux";
+import { useAppDispatch, useAppSelector } from "../../redux";
 
 import decimalAdjust from "../../helpers/decimalAdjust";
 
@@ -13,8 +13,10 @@ import tableBigImg from "../../assets/img/MainPage/tableBig.png";
 import userImg from "../../assets/img/MainPage/user.png";
 
 import "../../assets/scss/MainPage/Leaderboard.scss";
+import fetchWithToken from "../../helpers/fetchWithToken";
 
 const Leaderboard = ({ closeTab }) => {
+	const dispatch = useAppDispatch();
 	const { t } = useTranslation("common");
 	const content = t("content.leaderboard", { returnObjects: true });
 	const referralCounter = useAppSelector((state) => state.main.user.referralCounter);
@@ -23,64 +25,51 @@ const Leaderboard = ({ closeTab }) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [users, setUsers] = useState([]);
 	const [user, setUser] = useState([]);
-	const totalUsers = 23123;
+	const [totalUsers, setTotalUsers] = useState(0);
 
 	const fetchLeaderboard = async () => {
 		try {
 			setIsLoading(true);
 
+			const { success, data, error } = await fetchWithToken("/leaderboard", {
+				method: "GET",
+			});
 			// TODO: fetch fetchLeaderboard, user position, total users count, and list
 
-			setUser({
-				place: 111,
-				avatarUrl: "https://avatars.cloudflare.steamstatic.com/6a991cedbf9caf7e0dfd32c5f17f13820c818bf8_full.jpg",
-				name: "asdasda",
-				amount: 12312412,
-			});
-			setUsers([
-				{
-					avatarUrl: "https://avatars.cloudflare.steamstatic.com/6a991cedbf9caf7e0dfd32c5f17f13820c818bf8_full.jpg",
-					name: "asdasda",
-					amount: 12312412,
-				},
-				{
-					name: "asdasda",
-					amount: 12312412,
-				},
-				{
-					avatarUrl: "https://avatars.cloudflare.steamstatic.com/6a991cedbf9caf7e0dfd32c5f17f13820c818bf8_full.jpg",
-					name: "asdasda",
-					amount: 12312412,
-				},
-				{
-					avatarUrl: "https://avatars.cloudflare.steamstatic.com/6a991cedbf9caf7e0dfd32c5f17f13820c818bf8_full.jpg",
-					name: "asdasda",
-					amount: 12312412,
-				},
-				{
-					avatarUrl: "https://avatars.cloudflare.steamstatic.com/6a991cedbf9caf7e0dfd32c5f17f13820c818bf8_full.jpg",
-					name: "asdasda",
-					amount: 12312412,
-				},
-				{
-					avatarUrl: "https://avatars.cloudflare.steamstatic.com/6a991cedbf9caf7e0dfd32c5f17f13820c818bf8_full.jpg",
-					name: "asdasda",
-					amount: 12312412,
-				},
-				{
-					avatarUrl: "https://avatars.cloudflare.steamstatic.com/6a991cedbf9caf7e0dfd32c5f17f13820c818bf8_full.jpg",
-					name: "asdasda",
-					amount: 12312412,
-				},
-				{
-					avatarUrl: "https://avatars.cloudflare.steamstatic.com/6a991cedbf9caf7e0dfd32c5f17f13820c818bf8_full.jpg",
-					name: "asdasda",
-					amount: 12312412,
-				},
-			]);
-			setIsLoading(false);
+			if (success) {
+				setUser(data.user);
+				setUsers(data.leaderboard);
+				setTotalUsers(data.stats.users);
+			}
+
+			/*
+			{
+    "success": true,
+    "data": {
+        "leaderboard": [
+            {
+                "name": "anonym",
+                "amount": 10000,
+                "avatarUrl": "https://avatars.cloudflare.steamstatic.com/6a991cedbf9caf7e0dfd32c5f17f13820c818bf8_full.jpg"
+            },
+            {
+                "name": "anonym",
+                "amount": 0,
+                "avatarUrl": "https://avatars.cloudflare.steamstatic.com/6a991cedbf9caf7e0dfd32c5f17f13820c818bf8_full.jpg"
+            }
+        ],
+        "user": {
+            "place": 1,
+            "name": "anonym",
+            "amount": 10000
+        }
+    }
+			 */
+
 		} catch (e) {
 			console.error(e);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -111,12 +100,12 @@ const Leaderboard = ({ closeTab }) => {
 									<div className="icon-con">
 										<Image src={referralsGreenImg} alt={""} width={25} height={25} />
 									</div>
-									{referralCounter}
+									{user.referrals}
 								</div>
 							</div>
 							<div className="stats-item">
 								<div className="descr">{content.amount}</div>
-								<div className="descr">{decimalAdjust(+balance / 10000, 4)}</div>
+								<div className="descr">{decimalAdjust(+user.balance / 10000, 4)}</div>
 							</div>
 							<div className="stats-item">
 								<div className="descr">{content.totalUsers}</div>
@@ -139,7 +128,7 @@ const Leaderboard = ({ closeTab }) => {
 							</div>
 							<div className={"list-item"}>
 								<div className="main-wrap">
-									<div className="place">#{100}</div>
+									<div className="place">#{user.place}</div>
 									<div className="avatar-con" style={{ backgroundImage: `url(${user?.avatarUrl || userImg.src})` }} />
 									<div className="name">{content.you}</div>
 								</div>

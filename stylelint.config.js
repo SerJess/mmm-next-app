@@ -21,8 +21,5 @@ module.exports = {
 		"color-function-notation": null,
 		"alpha-value-notation": "number",
 	},
-	extends: [
-		"stylelint-config-standard-scss",
-		"stylelint-config-prettier-scss",
-	],
+	extends: ["stylelint-config-standard-scss", "stylelint-config-prettier-scss"],
 };
