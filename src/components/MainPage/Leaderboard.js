@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
-import { useAppDispatch, useAppSelector } from "../../redux";
 
 import decimalAdjust from "../../helpers/decimalAdjust";
+import fetchWithToken from "../../helpers/fetchWithToken";
 
 import LoaderResponsive from "../SingleComponents/LoaderResponsive";
 
@@ -13,14 +13,10 @@ import tableBigImg from "../../assets/img/MainPage/tableBig.png";
 import userImg from "../../assets/img/MainPage/user.png";
 
 import "../../assets/scss/MainPage/Leaderboard.scss";
-import fetchWithToken from "../../helpers/fetchWithToken";
 
 const Leaderboard = ({ closeTab }) => {
-	const dispatch = useAppDispatch();
 	const { t } = useTranslation("common");
 	const content = t("content.leaderboard", { returnObjects: true });
-	const referralCounter = useAppSelector((state) => state.main.user.referralCounter);
-	const balance = useAppSelector((state) => state.main.user.balance);
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [users, setUsers] = useState([]);
@@ -31,10 +27,9 @@ const Leaderboard = ({ closeTab }) => {
 		try {
 			setIsLoading(true);
 
-			const { success, data, error } = await fetchWithToken("/leaderboard", {
+			const { success, data } = await fetchWithToken("/leaderboard", {
 				method: "GET",
 			});
-			// TODO: fetch fetchLeaderboard, user position, total users count, and list
 
 			if (success) {
 				setUser(data.user);
@@ -65,7 +60,6 @@ const Leaderboard = ({ closeTab }) => {
         }
     }
 			 */
-
 		} catch (e) {
 			console.error(e);
 		} finally {

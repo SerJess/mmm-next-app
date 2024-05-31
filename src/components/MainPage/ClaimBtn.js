@@ -1,39 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "reactstrap";
 import { useTranslation } from "next-i18next";
-import dayjs from "dayjs";
 import { toast } from "react-toastify";
+
+import { setUser } from "../../redux/slices/main";
+import { useAppDispatch, useAppSelector } from "../../redux";
 
 import fetchWithToken from "../../helpers/fetchWithToken";
 
 import "../../assets/scss/MainPage/ClaimBtn.scss";
 
 const ClaimBtn = () => {
+	const dispatch = useAppDispatch();
 	const { t } = useTranslation("common");
 	const content = t("content.claim", { returnObjects: true });
 
+	const points = useAppSelector((state) => state.main.user.points);
+	const exited = useAppSelector((state) => state.main.user.exited);
+
 	const [isConfirmModal, setIsConfirmModal] = useState(false);
 	const [isAvailAbleToClaim, setIsAvailAbleToClaim] = useState(false);
-
-	useEffect(() => {
-		const isLastMinutes = new Date().getMinutes() > 55;
-
-		setIsAvailAbleToClaim(!isLastMinutes);
-
-		let timer = null;
-		if (!isLastMinutes) {
-			timer = setTimeout(
-				() => {
-					setIsAvailAbleToClaim(true);
-				},
-				dayjs().endOf("hour").diff(dayjs(), "millisecond")
-			);
-		}
-
-		return () => {
-			clearTimeout(timer);
-		};
-	});
 
 	const postClaim = async () => {
 		if (!isAvailAbleToClaim) {
@@ -42,19 +28,40 @@ const ClaimBtn = () => {
 		try {
 			setIsAvailAbleToClaim(false);
 
-			// TODO add refetch balance
 			const { success, error } = await fetchWithToken("/points/convert", { method: "POST" });
 
 			if (!success || error?.message) {
 				return toast.error(error?.message || "Something went wrong");
 			}
 
+			dispatch(setUser({ points: "0", exited: true }));
+			setIsConfirmModal(false);
 			return true;
 		} catch (e) {
 			console.error(e);
 		}
 		return false;
 	};
+
+	const checkAvailAbleToClaim = () => {
+		const isLastMinutes = new Date().getMinutes() > 55;
+		if (isLastMinutes) {
+			return setIsAvailAbleToClaim(false);
+		}
+		if (!+points || exited) {
+			return setIsAvailAbleToClaim(false);
+		}
+		return setIsAvailAbleToClaim(true);
+	};
+
+	useEffect(() => {
+		checkAvailAbleToClaim();
+		const interval = setInterval(checkAvailAbleToClaim, 1000);
+
+		return () => {
+			clearInterval(interval);
+		};
+	}, [points, exited]);
 
 	return (
 		<>

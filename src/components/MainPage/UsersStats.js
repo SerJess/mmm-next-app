@@ -4,9 +4,11 @@ import Image from "next/image";
 import Countdown, { zeroPad } from "react-countdown";
 import { useTranslation } from "next-i18next";
 import dayjs from "dayjs";
+import CountUp from "react-countup";
 
 import { useAppSelector } from "../../redux";
 import decimalAdjust from "../../helpers/decimalAdjust";
+import easingFunc from "../../helpers/easingFunc";
 
 import level1Img from "../../assets/img/MainPage/tables/level1.png";
 import level2Img from "../../assets/img/MainPage/tables/level2.png";
@@ -61,7 +63,9 @@ const UsersStats = () => {
 					{content.yourStatus}
 					<span className="diff-color">{content.levels[level]}</span>
 				</div>
-				<div className="score-con">{score}</div>
+				<div className="score-con">
+					<CountUp preserveValue end={score} separator={""} easingFn={easingFunc} duration={1} />
+				</div>
 				<div className="timer-con">
 					{content.toDrops}
 					<Countdown
