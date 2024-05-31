@@ -16,6 +16,10 @@ const fetchData = (url, options = {}, contentType = "application/json", addition
 		options.body = JSON.stringify(options.body);
 	}
 
+	if (options.method === "POST" && !options.body) {
+		delete headers["Content-Type"];
+	}
+
 	return fetch(`${originUrl || ""}${url}`, {
 		headers,
 		...options,
