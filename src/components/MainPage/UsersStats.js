@@ -21,7 +21,7 @@ import level7Img from "../../assets/img/MainPage/tables/level7.png";
 import "../../assets/scss/MainPage/UsersStats.scss";
 
 const imagesByLevel = {
-	0: level7Img,
+	0: level1Img,
 	7: level1Img,
 	6: level2Img,
 	5: level3Img,

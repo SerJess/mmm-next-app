@@ -15,7 +15,7 @@ import level7Img from "../../assets/img/MainPage/bg/level7.png";
 import "../../assets/scss/MainPage/BackgroundImage.scss";
 
 const imagesByLevel = {
-	0: level7Img,
+	0: level1Img,
 	7: level1Img,
 	6: level2Img,
 	5: level3Img,
