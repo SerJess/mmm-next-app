@@ -3,7 +3,7 @@
 		position: relative;
 		display: flex;
 		margin-bottom: 20px;
-		width: 100%;
+		width: 75%;
 		max-width: 600px;
 
 		.stats-bg {
@@ -26,9 +26,9 @@
 
 			.level-con {
 				margin-bottom: 8px;
-				font-size: 24px;
+				font-size: 20px;
 				font-weight: 400;
-				line-height: 29.64px;
+				line-height: 1;
 				text-shadow: 0 4px 4px #00000040;
 			}
 
@@ -40,7 +40,7 @@
 				border-radius: 10px;
 				background-color: #dedede;
 				color: #009a02;
-				font-size: 128px;
+				font-size: 75px;
 				line-height: 0.9;
 				text-shadow: 0 6px 4px #0000004d;
 				border: 2px solid #b1b1b1;

@@ -1,3 +1,14 @@
+.loader-image {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	z-index: 99;
+	background-image: url("../../../assets/img/loader.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
 .main-page-con {
 	position: relative;
 	height: 100%;
@@ -13,11 +24,11 @@
 		.main-screen-con {
 			display: flex;
 			align-items: center;
-			justify-content: center;
 			flex-direction: column;
-			flex-grow: 1;
 			overflow: auto;
 			padding-bottom: 10px;
+			min-height: 1px;
+			flex-grow: 1;
 		}
 	}
 

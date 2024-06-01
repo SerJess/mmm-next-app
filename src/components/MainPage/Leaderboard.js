@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import { Carousel, CarouselItem } from "reactstrap";
 
 import decimalAdjust from "../../helpers/decimalAdjust";
 import fetchWithToken from "../../helpers/fetchWithToken";
@@ -22,6 +23,7 @@ const Leaderboard = ({ closeTab }) => {
 	const [users, setUsers] = useState([]);
 	const [user, setUser] = useState([]);
 	const [totalUsers, setTotalUsers] = useState(0);
+	const [activeSlide, setActiveSlide] = useState(0);
 
 	const fetchLeaderboard = async () => {
 		try {
@@ -69,6 +71,13 @@ const Leaderboard = ({ closeTab }) => {
 
 	useEffect(() => {
 		fetchLeaderboard();
+		const timer = setInterval(() => {
+			setActiveSlide((prevState) => (prevState + 1) % 3);
+		}, 4000);
+
+		return () => {
+			clearInterval(timer);
+		};
 	}, []);
 
 	return (
@@ -88,22 +97,37 @@ const Leaderboard = ({ closeTab }) => {
 							<Image src={leaderboardImg} alt={""} width={138} height={48} />
 						</div>
 						<div className="bordered-white referral-stats-con">
-							<div className="stats-item">
-								<div className="descr">{content.referrals}</div>
-								<div className="descr">
-									<div className="icon-con">
-										<Image src={referralsGreenImg} alt={""} width={25} height={25} />
-									</div>
-									{user.referrals}
+							<div className="carousel-wrapper">
+								<Carousel activeIndex={activeSlide} next={() => {}} previous={() => {}} className="ref-slider">
+									<CarouselItem className="custom-tag" tag="div">
+										<div className="stats-item">
+											<div className="descr">{content.referrals}</div>
+											<div className="descr">
+												<div className="icon-con">
+													<Image src={referralsGreenImg} alt={""} width={25} height={25} />
+												</div>
+												{user.referrals}
+											</div>
+										</div>
+									</CarouselItem>
+									<CarouselItem className="custom-tag" tag="div">
+										<div className="stats-item">
+											<div className="descr">{content.amount}</div>
+											<div className="descr">{decimalAdjust(+user.balance / 10000, 4)}</div>
+										</div>
+									</CarouselItem>
+									<CarouselItem className="custom-tag" tag="div">
+										<div className="stats-item">
+											<div className="descr">{content.totalUsers}</div>
+											<div className="descr">{totalUsers}</div>
+										</div>
+									</CarouselItem>
+								</Carousel>
+								<div className="carousel-indiacation-con">
+									<div className={`indicator-item${activeSlide === 0 ? " active" : ""}`} />
+									<div className={`indicator-item${activeSlide === 1 ? " active" : ""}`} />
+									<div className={`indicator-item${activeSlide === 2 ? " active" : ""}`} />
 								</div>
-							</div>
-							<div className="stats-item">
-								<div className="descr">{content.amount}</div>
-								<div className="descr">{decimalAdjust(+user.balance / 10000, 4)}</div>
-							</div>
-							<div className="stats-item">
-								<div className="descr">{content.totalUsers}</div>
-								<div className="descr">{totalUsers}</div>
 							</div>
 						</div>
 						<div className="bordered-white users-list">

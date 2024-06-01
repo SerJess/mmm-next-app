@@ -17,7 +17,6 @@ import Leaderboard from "../components/MainPage/Leaderboard";
 import Settings from "../components/MainPage/settings/Settings";
 import Referrals from "../components/MainPage/Referrals";
 import Achievements from "../components/MainPage/Achievements";
-import Loader from "../components/SingleComponents/Loader";
 
 import "../assets/scss/MainPage/main.scss";
 import { NewLevelModal } from "../components/MainPage/settings/SettingsModals";
@@ -29,6 +28,7 @@ const Index = () => {
 	const [activeTab, setActiveTab] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
 	const [isNewLevel, setIsNewLevel] = useState(false);
+	const [isShowLoader, setIsShowLoader] = useState(true);
 
 	const getUser = async () => {
 		try {
@@ -90,9 +90,17 @@ const Index = () => {
 		};
 	}, []);
 
+	useEffect(() => {
+		if (!isLoading) {
+			setTimeout(() => {
+				setIsShowLoader(false);
+			}, 2000);
+		}
+	}, [isLoading]);
+
 	return (
 		<>
-			{isLoading && <Loader />}
+			{isShowLoader && <div className="loader-image" />}
 			{!isLoading && (
 				<div className="main-page-con">
 					<BackgroundImage />

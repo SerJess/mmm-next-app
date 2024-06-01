@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { toast } from "react-toastify";
+import { Carousel, CarouselItem } from "reactstrap";
 
 import LoaderResponsive from "../SingleComponents/LoaderResponsive";
 import { useAppSelector } from "../../redux";
@@ -25,6 +26,7 @@ const Referrals = ({ closeTab }) => {
 	const usersRefLink = useAppSelector((state) => state.main.user.referralCode);
 
 	const [isLoading, setIsLoading] = useState(true);
+	const [activeSlide, setActiveSlide] = useState(0);
 	const [stats, setStats] = useState({});
 
 	const getShareLink = () => `https://t.me/share/url?url=${usersRefLink}&text=${textForDm}`;
@@ -49,6 +51,16 @@ const Referrals = ({ closeTab }) => {
 	};
 
 	useEffect(() => {
+		const timer = setInterval(() => {
+			setActiveSlide((prevState) => (prevState + 1) % 2);
+		}, 4000);
+
+		return () => {
+			clearInterval(timer);
+		};
+	}, []);
+
+	useEffect(() => {
 		fetchStats();
 	}, []);
 
@@ -70,30 +82,40 @@ const Referrals = ({ closeTab }) => {
 						</div>
 						<div className="bordered-white referral-stats-con">
 							<p className="title">{content.title}</p>
-							<div className="ref-info-con">
-								<div className="referral-item">
-									<div className="img-con">
-										<Image src={friendImg} alt={""} width={32} height={32} />
-									</div>
-									<div className="descr-con">
-										<p className="descr-main">{content.invite}</p>
-										<p className="descr">
-											<span className="diff-color">{COMMON_REF}</span>
-											{content.invite}
-										</p>
-									</div>
-								</div>
-								<div className="referral-item">
-									<div className="img-con">
-										<Image src={premiumImg} alt={""} width={32} height={32} />
-									</div>
-									<div className="descr-con">
-										<p className="descr-main">{content.premium}</p>
-										<p className="descr">
-											<span className="diff-color">{PREMIUM_REF}</span>
-											{content.invite}
-										</p>
-									</div>
+							<div className="carousel-wrapper">
+								<Carousel activeIndex={activeSlide} next={() => {}} previous={() => {}} className="ref-slider">
+									<CarouselItem className="custom-tag" tag="div">
+										<div className="referral-item">
+											<div className="img-con">
+												<Image src={friendImg} alt={""} width={32} height={32} />
+											</div>
+											<div className="descr-con">
+												<p className="descr-main">{content.invite}</p>
+												<p className="descr">
+													<span className="diff-color">{COMMON_REF}</span>
+													{content.invite}
+												</p>
+											</div>
+										</div>
+									</CarouselItem>
+									<CarouselItem className="custom-tag" tag="div">
+										<div className="referral-item">
+											<div className="img-con">
+												<Image src={premiumImg} alt={""} width={32} height={32} />
+											</div>
+											<div className="descr-con">
+												<p className="descr-main">{content.premium}</p>
+												<p className="descr">
+													<span className="diff-color">{PREMIUM_REF}</span>
+													{content.invite}
+												</p>
+											</div>
+										</div>
+									</CarouselItem>
+								</Carousel>
+								<div className="carousel-indiacation-con">
+									<div className={`indicator-item${activeSlide === 0 ? " active" : ""}`} />
+									<div className={`indicator-item${activeSlide === 1 ? " active" : ""}`} />
 								</div>
 							</div>
 							<a href={getShareLink()} className="bordered-green share-btn">

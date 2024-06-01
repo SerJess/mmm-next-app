@@ -16,13 +16,12 @@ const Achievements = ({ closeTab }) => {
 	const referralLevel = useAppSelector((state) => state.main.user.referralLevel);
 
 	const items = [
-		{ title: content.achievements["1"], reward: "0.5" },
-		{ title: content.achievements["2"], reward: "3" },
-		{ title: content.achievements["3"], reward: "10" },
-		{ title: content.achievements["4"], reward: "50" },
-		{ title: content.achievements["5"], reward: "250" },
-		{ title: content.achievements["6"], reward: "1000" },
-		{ title: content.achievements["7"], reward: "3000" },
+		{ title: content.achievements["2"], reward: "0,5" },
+		{ title: content.achievements["3"], reward: "3" },
+		{ title: content.achievements["4"], reward: "10" },
+		{ title: content.achievements["5"], reward: "50" },
+		{ title: content.achievements["6"], reward: "250" },
+		{ title: content.achievements["7"], reward: "1000" },
 	];
 
 	return (
@@ -40,7 +39,7 @@ const Achievements = ({ closeTab }) => {
 						{items.map(({ title, reward }, i) => (
 							<div key={`reward-item${i}`} className="achievement-item">
 								<div className="descr-con">
-									<div className="img-con">{!!+referralLevel && i <= 7 - +referralLevel && <Image src={completedImg} alt={""} width={32} height={32} />}</div>
+									<div className="img-con">{!!+referralLevel && i <= 6 - +referralLevel + 1 && <Image src={completedImg} alt={""} width={32} height={32} />}</div>
 									<div className="descr">{title}</div>
 								</div>
 								<div className="descr-reward">
