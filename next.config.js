@@ -37,6 +37,7 @@ module.exports = {
 		SITE_URL: process.env.SITE_URL,
 		APP_DOMAIN: process.env.APP_DOMAIN,
 		TON_MANIFEST_URL: process.env.TON_MANIFEST_URL,
+		BOT_USER_NAME: process.env.BOT_USER_NAME,
 	},
 	sassOptions: {
 		includePaths: [path.join(__dirname, "assets/scss")],

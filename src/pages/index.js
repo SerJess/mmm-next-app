@@ -17,9 +17,10 @@ import Leaderboard from "../components/MainPage/Leaderboard";
 import Settings from "../components/MainPage/settings/Settings";
 import Referrals from "../components/MainPage/Referrals";
 import Achievements from "../components/MainPage/Achievements";
+import { NewLevelModal } from "../components/MainPage/settings/SettingsModals";
+import AccessModal from "../components/MainPage/AccessModal";
 
 import "../assets/scss/MainPage/main.scss";
-import { NewLevelModal } from "../components/MainPage/settings/SettingsModals";
 
 const Index = () => {
 	const dispatch = useAppDispatch();
@@ -29,12 +30,14 @@ const Index = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isNewLevel, setIsNewLevel] = useState(false);
 	const [isShowLoader, setIsShowLoader] = useState(true);
+	const [isAllowedToPlay, setIsAllowedToPlay] = useState(false);
 
 	const getUser = async () => {
 		try {
 			const { success, data, error } = await fetchWithToken("/users");
 
 			if (!success || error?.message || !data) {
+				console.log(data);
 				return toast.error(error?.message || "Something went wrong");
 			}
 
@@ -44,6 +47,7 @@ const Index = () => {
 			}
 			localStorage.setItem(`prevLevel-${data.chatId}`, `${data.referralLevel}`);
 
+			setIsAllowedToPlay(data.allowedToPlay);
 			return data;
 		} catch (e) {
 			console.error(e);
@@ -56,6 +60,7 @@ const Index = () => {
 			const { success, data, error } = await fetchWithToken("/users/income");
 
 			if (!success || error?.message) {
+				console.log(1);
 				return toast.error(error?.message || "Something went wrong");
 			}
 
@@ -113,12 +118,13 @@ const Index = () => {
 									<TvContainer />
 									<ClaimBtn />
 									<NewLevelModal isOpen={isNewLevel} close={() => setIsNewLevel(false)} />
+									{!isAllowedToPlay && !isShowLoader && <AccessModal closeModal={() => setIsAllowedToPlay(true)} />}
 								</>
 							)}
-							{activeTab === "leaderboard" && <Leaderboard closeTab={() => setActiveTab("")} />}
-							{activeTab === "settings" && <Settings closeTab={() => setActiveTab("")} />}
-							{activeTab === "referrals" && <Referrals closeTab={() => setActiveTab("")} />}
-							{activeTab === "achievements" && <Achievements closeTab={() => setActiveTab("")} />}
+							{activeTab === "leaderboard" && <Leaderboard />}
+							{activeTab === "settings" && <Settings />}
+							{activeTab === "referrals" && <Referrals />}
+							{activeTab === "achievements" && <Achievements />}
 						</div>
 						<NavPanel setActiveTab={setActiveTab} />
 					</div>

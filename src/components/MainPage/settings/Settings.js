@@ -17,7 +17,7 @@ import supportImg from "../../../assets/img/MainPage/settings/support.png";
 
 import "../../../assets/scss/MainPage/Settings.scss";
 
-const Settings = ({ closeTab }) => {
+const Settings = () => {
 	const { t } = useTranslation("common");
 	const content = t("content.settings", { returnObjects: true });
 	const currentWalletAddress = useAppSelector((state) => state.main.user.walletAddress);
@@ -88,11 +88,6 @@ const Settings = ({ closeTab }) => {
 							{walletConcat || content.connectWallet}
 						</div>
 					</div>
-				</div>
-			</div>
-			<div className="close-btn-con">
-				<div className="bordered-green close-btn" onClick={closeTab}>
-					{content.close}
 				</div>
 			</div>
 			<LanguageModal isOpen={isLanguageModalOpen} close={() => setIsLanguageModalOpen(false)} />

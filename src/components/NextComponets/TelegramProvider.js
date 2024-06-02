@@ -27,8 +27,8 @@ export const TelegramProvider = ({ children }) => {
 			app.expand();
 			app.onEvent("viewportChanged", expand);
 
-			app.setHeaderColor("#d4d0b4");
-			app.setBackgroundColor("#d4d0b4");
+			app.setHeaderColor("#D3D3D3");
+			app.setBackgroundColor("#D3D3D3");
 
 			app.BackButton.onClick(() => {
 				window.history.back();

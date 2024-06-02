@@ -10,7 +10,7 @@ import completedImg from "../../assets/img/MainPage/completed.png";
 
 import "../../assets/scss/MainPage/Achievements.scss";
 
-const Achievements = ({ closeTab }) => {
+const Achievements = () => {
 	const { t } = useTranslation("common");
 	const content = t("content.achievements", { returnObjects: true });
 	const referralLevel = useAppSelector((state) => state.main.user.referralLevel);
@@ -50,11 +50,6 @@ const Achievements = ({ closeTab }) => {
 							</div>
 						))}
 					</div>
-				</div>
-			</div>
-			<div className="close-btn-con">
-				<div className="bordered-green close-btn" onClick={closeTab}>
-					{content.close}
 				</div>
 			</div>
 		</div>

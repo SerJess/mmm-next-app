@@ -15,11 +15,11 @@ import premiumImg from "../../assets/img/MainPage/settings/premium.png";
 
 import "../../assets/scss/MainPage/Referrals.scss";
 
-const COMMON_REF = "+1,500 $MMM ";
-const PREMIUM_REF = "+10,500 $MMM ";
+const COMMON_REF = "+5 $MMM ";
+const PREMIUM_REF = "+10 $MMM ";
 const textForDm = "Hey! Check it out!";
 
-const Referrals = ({ closeTab }) => {
+const Referrals = () => {
 	const { t } = useTranslation("common");
 	const content = t("content.referrals", { returnObjects: true });
 
@@ -29,7 +29,7 @@ const Referrals = ({ closeTab }) => {
 	const [activeSlide, setActiveSlide] = useState(0);
 	const [stats, setStats] = useState({});
 
-	const getShareLink = () => `https://t.me/share/url?url=${usersRefLink}&text=${textForDm}`;
+	const getShareLink = () => `https://t.me/share/url?url=https://t.me/${process.env.BOT_USER_NAME}?start=${usersRefLink}&text=${textForDm}`;
 
 	const fetchStats = async () => {
 		try {
@@ -41,7 +41,6 @@ const Referrals = ({ closeTab }) => {
 				return toast.error(error?.message || "Something went wrong");
 			}
 
-			// TODO return grouped by level - data: {1:100, 2: 200...}
 			setStats(data);
 			setIsLoading(false);
 		} catch (e) {
@@ -135,11 +134,6 @@ const Referrals = ({ closeTab }) => {
 						</div>
 					</div>
 				)}
-			</div>
-			<div className="close-btn-con">
-				<div className="bordered-green close-btn" onClick={closeTab}>
-					{content.close}
-				</div>
 			</div>
 		</div>
 	);

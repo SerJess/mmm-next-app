@@ -15,7 +15,7 @@ import userImg from "../../assets/img/MainPage/user.png";
 
 import "../../assets/scss/MainPage/Leaderboard.scss";
 
-const Leaderboard = ({ closeTab }) => {
+const Leaderboard = () => {
 	const { t } = useTranslation("common");
 	const content = t("content.leaderboard", { returnObjects: true });
 
@@ -155,11 +155,6 @@ const Leaderboard = ({ closeTab }) => {
 						</div>
 					</div>
 				)}
-			</div>
-			<div className="close-btn-con">
-				<div className="bordered-green close-btn" onClick={closeTab}>
-					{content.close}
-				</div>
 			</div>
 		</div>
 	);

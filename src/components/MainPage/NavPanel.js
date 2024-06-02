@@ -5,10 +5,15 @@ import referralsIcon from "../../assets/img/MainPage/navBar/referrals.png";
 import achievementIcon from "../../assets/img/MainPage/navBar/achievement.svg";
 import leaderboardIcon from "../../assets/img/MainPage/navBar/leaderboard.svg";
 import settingsIcon from "../../assets/img/MainPage/navBar/settings.svg";
+import tvIcon from "../../assets/img/MainPage/navBar/tv.png";
 
 import "../../assets/scss/MainPage/NavPanel.scss";
 
 const navItems = [
+	{
+		id: "home",
+		icon: tvIcon,
+	},
 	{
 		id: "referrals",
 		icon: referralsIcon,
@@ -30,7 +35,7 @@ const NavPanel = ({ setActiveTab }) => (
 	<div className="nav-panel-wrapper wide-con">
 		<div className="nav-panel-con">
 			{navItems.map((item) => (
-				<div key={item.id} className="nav-item" onClick={() => setActiveTab(item.id)}>
+				<div key={item.id} className="nav-item" onClick={() => setActiveTab(item.id === "home" ? "" : item.id)}>
 					<Image src={item.icon} alt={""} width={20} height={20} />
 				</div>
 			))}
