@@ -52,13 +52,12 @@ const SocialsModal = ({ isOpen, close }) => {
 
 	const { webApp } = useTelegram();
 
-	// TODO ADD LINKS TO SOCIALS
 	const openTelegram = () => {
-		webApp.openTelegramLink("https://t.me/durov");
+		webApp.openTelegramLink("https://t.me/MMM2049");
 	};
 
 	const openLink = () => {
-		webApp.openLink("https://x.com/durov");
+		webApp.openLink("https://x.com/Bitcoin_pyramid");
 	};
 
 	return (
@@ -88,11 +87,16 @@ const SupportModal = ({ isOpen, close }) => {
 	const { t } = useTranslation("common");
 	const content = t("content.settings", { returnObjects: true });
 
+	const { webApp } = useTelegram();
+
+	const openTelegram = () => {
+		webApp.openTelegramLink("https://t.me/golubkovMMM");
+	};
 	return (
 		<Modal isOpen={isOpen} toggle={close} className="custom-settings-modal">
 			<div className="settings-modal-con">
 				<p className="descr">{content.support}</p>
-				<div className="btns-con">
+				<div className="btns-con" onClick={openTelegram}>
 					<div className="btn-item confirm-btn wide">{content.write}</div>
 				</div>
 			</div>
