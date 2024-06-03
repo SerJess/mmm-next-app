@@ -49,7 +49,7 @@ const AccessModal = ({ closeModal }) => {
 				messages: [
 					{
 						address: "UQBKJirjWuKMf02Cgw1-zx2FqPf3aeXmMVcevooscaO55Z7_", // destination address
-						amount: `2000000000`, // 2 TON
+						amount: "2000000000", // 2 TON
 						payload: "",
 					},
 				],
@@ -89,7 +89,7 @@ const AccessModal = ({ closeModal }) => {
 						<p className="descr">{content.title}</p>
 						<div className="btns-con">
 							<div className="btn-item confirm-btn" onClick={walletBtnClick}>
-								{!!newConnectedAddress ? content.purchase : content.connectWallet}
+								{newConnectedAddress ? content.purchase : content.connectWallet}
 							</div>
 							<div className="btn-item confirm-btn" onClick={closeModal}>
 								{content.enterCode}

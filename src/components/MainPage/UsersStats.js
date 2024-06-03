@@ -22,13 +22,12 @@ import "../../assets/scss/MainPage/UsersStats.scss";
 
 const imagesByLevel = {
 	0: level1Img,
-	7: level1Img,
-	6: level2Img,
-	5: level3Img,
-	4: level4Img,
-	3: level5Img,
-	2: level6Img,
-	1: level7Img,
+	1: level2Img,
+	2: level3Img,
+	3: level4Img,
+	4: level5Img,
+	5: level6Img,
+	6: level7Img,
 };
 
 const UsersStats = () => {

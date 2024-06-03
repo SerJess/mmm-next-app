@@ -3,14 +3,17 @@
 		.btns-con {
 			display: flex;
 			flex-direction: column;
+
 			.btn-item {
 				width: 100%;
 				margin-bottom: 15px;
+
 				&:last-child {
 					margin-bottom: 0;
 				}
 			}
 		}
+
 		.img-con {
 			display: flex;
 			justify-content: center;

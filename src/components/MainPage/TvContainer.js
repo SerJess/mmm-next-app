@@ -7,13 +7,13 @@ import { toast } from "react-toastify";
 
 import fetchWithToken from "../../helpers/fetchWithToken";
 import { useAppDispatch, useAppSelector } from "../../redux";
+import { setUser } from "../../redux/slices/main";
 
 import tvImg from "../../assets/img/MainPage/tv/tv.png";
 import triangleGreen from "../../assets/img/MainPage/tv/triangleGreen.json";
 import boostBtnImg from "../../assets/img/MainPage/tv/boostBtn.png";
 
 import "../../assets/scss/MainPage/TvContainer.scss";
-import { setUser } from "../../redux/slices/main";
 
 dayjs.extend(utc);
 
@@ -23,6 +23,7 @@ const TvContainer = () => {
 	const dispatch = useAppDispatch();
 	const lastBoostClaim = useAppSelector((state) => state.main.user.lastGuaranteedBoostUsageDate);
 	const isBoosted = useAppSelector((state) => state.main.user.usedBoost);
+	const isExited = useAppSelector((state) => state.main.user.exited);
 
 	const [isBoostActive, setIsBoostActive] = React.useState(false);
 	const [isLoading, setIsLoading] = React.useState(false);
@@ -51,7 +52,7 @@ const TvContainer = () => {
 	};
 
 	useEffect(() => {
-		if (lastBoostClaim && !isBoosted) {
+		if (lastBoostClaim && !isBoosted && !isExited) {
 			const isOneDayAgo = dayjs(lastBoostClaim).utc().utc().add(1, "day").isAfter(dayjs());
 			if (!isOneDayAgo) {
 				setIsBoostActive(true);
@@ -68,7 +69,7 @@ const TvContainer = () => {
 				</div>
 				{isBoostActive && (
 					<div className="boost-btn" onClick={postBoost}>
-						<Image src={boostBtnImg} alt={""} width={66} height={66} />
+						<Image src={boostBtnImg} alt={""} width={50} height={50} />
 					</div>
 				)}
 			</div>

@@ -37,7 +37,6 @@ const Index = () => {
 			const { success, data, error } = await fetchWithToken("/users");
 
 			if (!success || error?.message || !data) {
-				console.log(data);
 				return toast.error(error?.message || "Something went wrong");
 			}
 
@@ -60,7 +59,6 @@ const Index = () => {
 			const { success, data, error } = await fetchWithToken("/users/income");
 
 			if (!success || error?.message) {
-				console.log(1);
 				return toast.error(error?.message || "Something went wrong");
 			}
 
