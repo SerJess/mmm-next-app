@@ -30,6 +30,24 @@
 				top: 15%;
 				left: 63%;
 			}
+
+			.btn-item {
+				position: absolute;
+				top: 15%;
+				left: 10%;
+				padding: 10px;
+				font-size: 15px;
+				line-height: 1px;
+				text-align: center;
+				border-radius: 10px;
+				color: white;
+
+				&.confirm-btn {
+					background-color: #009a02;
+					border: 2px solid #016b0240;
+					box-shadow: 0 2px 2.5px #016b02;
+				}
+			}
 		}
 	}
 }

@@ -14,6 +14,7 @@ const ClaimBtn = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation("common");
 	const content = t("content.claim", { returnObjects: true });
+	const popUps = t("content.popUps", { returnObjects: true });
 
 	const points = useAppSelector((state) => state.main.user.points);
 	const exited = useAppSelector((state) => state.main.user.exited);
@@ -36,6 +37,7 @@ const ClaimBtn = () => {
 
 			dispatch(setUser({ points: "0", exited: true }));
 			setIsConfirmModal(false);
+			toast.success(popUps.convert);
 			return true;
 		} catch (e) {
 			console.error(e);

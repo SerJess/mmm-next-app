@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { toast } from "react-toastify";
+import { useTranslation } from "next-i18next";
 
 import fetchWithToken from "../../helpers/fetchWithToken";
 import { useAppDispatch, useAppSelector } from "../../redux";
@@ -21,11 +22,18 @@ const Lottie = dynamic(() => import("lottie-react").then((module) => module), { 
 
 const TvContainer = () => {
 	const dispatch = useAppDispatch();
+	const { t } = useTranslation("common");
+	const popUps = t("content.popUps", { returnObjects: true });
+	const content = t("content.tv", { returnObjects: true });
+
 	const lastBoostClaim = useAppSelector((state) => state.main.user.lastGuaranteedBoostUsageDate);
+	const lastFreePointsClaim = useAppSelector((state) => state.main.user.lastFreePointsDate);
 	const isBoosted = useAppSelector((state) => state.main.user.usedBoost);
 	const isExited = useAppSelector((state) => state.main.user.exited);
+	const points = useAppSelector((state) => state.main.user.points);
 
 	const [isBoostActive, setIsBoostActive] = React.useState(false);
+	const [isFreePointsActive, setIsFreePointsActive] = React.useState(false);
 	const [isLoading, setIsLoading] = React.useState(false);
 
 	const postBoost = async () => {
@@ -42,6 +50,32 @@ const TvContainer = () => {
 				return toast.error(error?.message || "Something went wrong");
 			}
 			dispatch(setUser({ usedBoost: true, lastGuaranteedBoostUsageDate: dayjs().utc().toDate() }));
+			toast.success(popUps.boost);
+		} catch (e) {
+			console.error(e);
+		} finally {
+			setIsBoostActive(false);
+			setIsLoading(false);
+		}
+		return true;
+	};
+
+	const postClaimFree = async () => {
+		if (isLoading) {
+			return false;
+		}
+		try {
+			setIsLoading(true);
+			const { success, error } = await fetchWithToken("/points/free", {
+				method: "POST",
+			});
+
+			if (!success || error?.message) {
+				return toast.error(error?.message || "Something went wrong");
+			}
+
+			dispatch(setUser({ points: `${+points + 10 * 100}`, lastFreePointsDate: dayjs().utc().toDate() }));
+			toast.success(popUps.freePoints);
 		} catch (e) {
 			console.error(e);
 		} finally {
@@ -58,6 +92,12 @@ const TvContainer = () => {
 				setIsBoostActive(true);
 			}
 		}
+		if (lastFreePointsClaim && !isExited) {
+			const isOneDayAgo = dayjs(lastFreePointsClaim).utc().utc().add(1, "day").isAfter(dayjs());
+			if (!isOneDayAgo) {
+				setIsFreePointsActive(true);
+			}
+		}
 	}, []);
 
 	return (
@@ -67,6 +107,11 @@ const TvContainer = () => {
 				<div className="triangle-con">
 					<Lottie animationData={triangleGreen} loop={true} />
 				</div>
+				{isFreePointsActive && (
+					<div className="btn-item confirm-btn" onClick={postClaimFree}>
+						+10 {content.mavr}
+					</div>
+				)}
 				{isBoostActive && (
 					<div className="boost-btn" onClick={postBoost}>
 						<Image src={boostBtnImg} alt={""} width={50} height={50} />
