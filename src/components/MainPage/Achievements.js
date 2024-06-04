@@ -46,7 +46,7 @@ const Achievements = () => {
 									<div className="descr">{title}</div>
 								</div>
 								<div className="descr-reward">
-									{reward}
+									+{reward}
 									<br />
 									{content.perHour}
 								</div>
