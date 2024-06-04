@@ -79,7 +79,7 @@ const TvContainer = () => {
 		} catch (e) {
 			console.error(e);
 		} finally {
-			setIsBoostActive(false);
+			setIsFreePointsActive(false);
 			setIsLoading(false);
 		}
 		return true;
