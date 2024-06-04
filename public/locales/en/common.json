@@ -7,10 +7,10 @@
 			"levels": {
 				"0": "Freeloader",
 				"1": "Partner",
-				"2": "Decurion",
+				"2": "Tenser",
 				"3": "Centurion",
-				"4": "Chiliarch",
-				"5": "Myrmidon",
+				"4": "Thousandaire",
+				"5": "Temnic",
 				"6": "Millionaires"
 			}
 		},
@@ -32,10 +32,10 @@
 			"levels": {
 				"0": "Freeloader",
 				"1": "Partner",
-				"2": "Decurion",
+				"2": "Tenser",
 				"3": "Centurion",
-				"4": "Chiliarch",
-				"5": "Myrmidon",
+				"4": "Thousandaire",
+				"5": "Temnic",
 				"6": "Millionaires"
 			}
 		},
@@ -57,10 +57,10 @@
 			"levels": {
 				"0": "Freeloader",
 				"1": "Partner",
-				"2": "Decurion",
+				"2": "Tenser",
 				"3": "Centurion",
-				"4": "Chiliarch",
-				"5": "Myrmidon",
+				"4": "Thousandaire",
+				"5": "Temnic",
 				"6": "Millionaires"
 			}
 		},
@@ -75,10 +75,10 @@
 			"levels": {
 				"0": "Freeloader",
 				"1": "Partner",
-				"2": "Decurion",
+				"2": "Tenser",
 				"3": "Centurion",
-				"4": "Chiliarch",
-				"5": "Myrmidon",
+				"4": "Thousandaire",
+				"5": "Temnic",
 				"6": "Millionaires"
 			}
 		},
@@ -88,9 +88,9 @@
 			"perHour": "MAVR/hr",
 			"achievements": {
 				"1": "Partner - 1+ referrals",
-				"2": "Decurion - 10+ referrals",
+				"2": "Tenser - 10+ referrals",
 				"3": "Centurion - 100+ referrals",
-				"4": "Chiliarch - 1000+ referrals",
+				"4": "Thousandaire - 1000+ referrals",
 				"5": "Myrmidon - 10000+ referrals",
 				"6": "Millionaires - from one million referrals"
 			}
