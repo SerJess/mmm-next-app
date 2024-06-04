@@ -18,7 +18,10 @@
 			border-radius: 10px;
 
 			&.disabled {
-				opacity: 0.5;
+				background-color: #c8c8c8;
+				color: #fff;
+				border: 2px solid rgb(29 29 29 / 0.25);
+				box-shadow: 0 2px 2.5px #020202;
 				pointer-events: none;
 			}
 		}
@@ -48,9 +51,16 @@
 		border-radius: 10px;
 
 		.descr {
+			margin-bottom: 15px;
+			font-size: 28px;
+			line-height: 30.52px;
+			text-align: center;
+		}
+
+		.sub-descr {
 			margin-bottom: 32px;
-			font-size: 32px;
-			line-height: 39.52px;
+			font-size: 17px;
+			line-height: 1;
 			text-align: center;
 		}
 

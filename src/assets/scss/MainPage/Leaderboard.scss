@@ -153,6 +153,15 @@
 								min-width: 30px;
 							}
 
+							.name {
+								word-break: break-word;
+
+								.level {
+									font-size: 12px;
+									margin-left: 5px;
+								}
+							}
+
 							.avatar-con {
 								margin: 0 10px;
 								width: 32px;

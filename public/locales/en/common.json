@@ -1,104 +1,115 @@
 {
 	"content": {
 		"stats": {
-			"yourStatus": "Ваш статус: ",
-			"toDrops": "До получения дивидендов: ",
-			"perHour": "мавров/час",
+			"yourStatus": "Your status: ",
+			"toDrops": "Until dividends: ",
+			"perHour": "mavros/hour",
 			"levels": {
-				"0": "Халявщик",
-				"1": "Партнер",
-				"2": "Десятник",
-				"3": "Сотник",
-				"4": "Тысячник",
-				"5": "Темник",
-				"6": "Миллионники"
+				"0": "Freeloader",
+				"1": "Partner",
+				"2": "Decurion",
+				"3": "Centurion",
+				"4": "Chiliarch",
+				"5": "Myrmidon",
+				"6": "Millionaires"
 			}
 		},
 		"claim": {
-			"claimNow": "ВЫВЕСТИ В $MMM",
-			"confirmation": "Вы уверены, что хотите вывести?",
-			"yes": "ВЫВЕСТИ",
-			"no": "НЕ ВЫВОДИТЬ"
+			"claimNow": "WITHDRAW IN $MMM",
+			"claimUnavailable": "WITHDRAWAL UNAVAILABLE",
+			"confirmation": "Are you sure you want to withdraw?",
+			"descr": "You are leaving the pyramid and stop receiving mavros. Rate: 1000 mavros = 0.1 MMM",
+			"yes": "WITHDRAW",
+			"no": "CANCEL"
 		},
 		"leaderboard": {
-			"title": "Таблица лидеров",
-			"referrals": "Рефералов",
-			"amount": "Количество $MMM",
-			"totalUsers": "Всего пользователей",
-			"you": "Вы",
-			"close": "ЗАКРЫТЬ"
+			"title": "Leaderboard",
+			"referrals": "Referrals",
+			"amount": "Amount of $MMM",
+			"totalUsers": "Total users",
+			"you": "You",
+			"close": "CLOSE",
+			"levels": {
+				"0": "Freeloader",
+				"1": "Partner",
+				"2": "Decurion",
+				"3": "Centurion",
+				"4": "Chiliarch",
+				"5": "Myrmidon",
+				"6": "Millionaires"
+			}
 		},
 		"settings": {
-			"settings": "Параметры",
-			"connectWallet": "ПРИВЯЗАТЬ КОШЕЛЕК",
-			"chooseLang": "Выберите язык",
+			"settings": "Settings",
+			"connectWallet": "CONNECT WALLET",
+			"chooseLang": "Choose language",
 			"rus": "Русский",
 			"eng": "English",
-			"socials": "Социальные сети",
-			"telegram": "ТГ канал",
-			"twitter": "Твиттер",
-			"support": "Обратиться в службу поддержки",
-			"write": "Написать",
-			"close": "ЗАКРЫТЬ",
-			"newLevel": "Поздравляем! Вы повысили уровень.",
-			"yourStatus": "Ваш статус:",
-			"continue": "Продолжить",
+			"socials": "Social networks",
+			"telegram": "TG channel",
+			"twitter": "Twitter",
+			"support": "Contact support",
+			"write": "Write",
+			"close": "CLOSE",
+			"newLevel": "Congratulations! You have leveled up.",
+			"yourStatus": "Your status:",
+			"continue": "Continue",
 			"levels": {
-				"0": "Халявщик",
-				"1": "Партнер",
-				"2": "Десятник",
-				"3": "Сотник",
-				"4": "Тысячник",
-				"5": "Темник",
-				"6": "Миллионники"
+				"0": "Freeloader",
+				"1": "Partner",
+				"2": "Decurion",
+				"3": "Centurion",
+				"4": "Chiliarch",
+				"5": "Myrmidon",
+				"6": "Millionaires"
 			}
 		},
 		"referrals": {
-			"title": "Пригласите друзей",
-			"invite": "Пригласите друга",
-			"premium": "Друг с Telegram Premium",
-			"forYou": "для тебя и друга",
-			"yourRef": "Ваши рефералы",
-			"share": "Пригласить",
-			"close": "ЗАКРЫТЬ",
+			"title": "Invite friends",
+			"invite": "Invite a friend",
+			"premium": "Friend with Telegram Premium",
+			"forYou": "for you and your friend",
+			"yourRef": "Your referrals",
+			"share": "Invite",
+			"close": "CLOSE",
 			"levels": {
-				"0": "Халявщик",
-				"1": "Партнер",
-				"2": "Десятник",
-				"3": "Сотник",
-				"4": "Тысячник",
-				"5": "Темник",
-				"6": "Миллионники"
+				"0": "Freeloader",
+				"1": "Partner",
+				"2": "Decurion",
+				"3": "Centurion",
+				"4": "Chiliarch",
+				"5": "Myrmidon",
+				"6": "Millionaires"
 			}
 		},
 		"achievements": {
-			"title": "Достижения",
-			"close": "ЗАКРЫТЬ",
-			"perHour": "МАВР-п/ч",
+			"title": "Achievements",
+			"close": "CLOSE",
+			"perHour": "MAVR/hr",
 			"achievements": {
-				"1": "Партнер - 1+ реферралов",
-				"2": "Десятник - 10+ реферралов",
-				"3": "Сотник - 100+ реферралов",
-				"4": "Тысячник - 1000+ реферралов",
-				"5": "Темник - 10000+ реферралов",
-				"6": "Миллионники - от миллиона реферралов"
+				"1": "Partner - 1+ referrals",
+				"2": "Decurion - 10+ referrals",
+				"3": "Centurion - 100+ referrals",
+				"4": "Chiliarch - 1000+ referrals",
+				"5": "Myrmidon - 10000+ referrals",
+				"6": "Millionaires - from one million referrals"
 			}
 		},
 		"accessModal": {
-			"title": "Чтобы продолжить игру, оплатите 2 TON или введите реферальный код.",
-			"connectWallet": "ПОДКЛЮЧИТЬ КОШЕЛЕК",
-			"purchase": "ОПЛАТИТЬ",
-			"enterCode": "ВВЕСТИ КОД",
-			"success": "Оплата прошла успешно",
-			"continue": "ПРОДОЛЖИТЬ"
+			"title": "To continue the game, pay 2 TON or enter a referral code.",
+			"connectWallet": "CONNECT WALLET",
+			"purchase": "PAY",
+			"enterCode": "ENTER CODE",
+			"success": "Payment was successful",
+			"continue": "CONTINUE"
 		},
 		"popUps": {
-			"boost": "Поздравляем! Вы получили 2х к мавров/час.",
-			"freePoints": "Поздравляем! Вы получили 10 мавров.",
-			"convert": "Мавры успешно конвертированы в $MMM."
+			"boost": "Congratulations! You received 2x mavros/hour.",
+			"freePoints": "Congratulations! You received 10 mavros.",
+			"convert": "Mavros successfully converted to $MMM."
 		},
 		"tv": {
-			"mavr": "МAВР"
+			"mavr": "MAVR"
 		}
 	}
 }

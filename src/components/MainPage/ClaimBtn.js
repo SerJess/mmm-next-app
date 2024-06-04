@@ -53,7 +53,7 @@ const ClaimBtn = () => {
 		if (!+points || exited) {
 			return setIsAvailAbleToClaim(false);
 		}
-		return setIsAvailAbleToClaim(true);
+		return setIsAvailAbleToClaim(false);
 	};
 
 	useEffect(() => {
@@ -69,12 +69,13 @@ const ClaimBtn = () => {
 		<>
 			<div className="claim-btn-con">
 				<div className={`claim-btn${isAvailAbleToClaim ? "" : " disabled"}`} onClick={() => setIsConfirmModal(true)}>
-					{content.claimNow}
+					{isAvailAbleToClaim ? content.claimNow : content.claimUnavailable}
 				</div>
 			</div>
 			<Modal isOpen={isConfirmModal} className="claim-confirmation-modal">
 				<div className="claim-confirmation-con">
 					<p className="descr">{content.confirmation}</p>
+					<p className="sub-descr">{content.descr}</p>
 					<div className="btns-con">
 						<div className={`btn-item confirm-btn${isAvailAbleToClaim ? "" : " disabled"}`} onClick={postClaim}>
 							{content.yes}

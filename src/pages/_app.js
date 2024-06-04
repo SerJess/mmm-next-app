@@ -51,7 +51,7 @@ class WebApp extends App {
 		const { isLoading } = this.state;
 		return (
 			<TelegramProvider>
-				<TonConnectUIProvider manifestUrl={process.env.TON_MANIFEST_URL}>
+				<TonConnectUIProvider manifestUrl={"https://mmmtest.fruttech.ru/tonconnect-manifest.json"}>
 					<StoreProvider initialReduxState={initialReduxState} clientSideDispatches={clientSideDispatches}>
 						<div id="next-app">
 							{isLoading && <Loader />}

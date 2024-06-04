@@ -79,8 +79,11 @@ const UsersStats = () => {
 					/>
 				</div>
 				<div className="per-hour">
-					{isBoosted && "x2 "}
-					<span className="diff-color">{perHour}</span> {content.perHour}
+					<span className="diff-color">
+						{perHour}
+						{isBoosted && " x 2"}
+					</span>{" "}
+					{content.perHour}
 				</div>
 			</div>
 		</div>
