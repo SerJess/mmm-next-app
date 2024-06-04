@@ -17,7 +17,7 @@ import "../../assets/scss/MainPage/Referrals.scss";
 
 const COMMON_REF = "+5 $MMM ";
 const PREMIUM_REF = "+10 $MMM ";
-const textForDm = "Hey! Check it out!";
+const textForDm = "Мы Можем Многое - присоединяйся.";
 
 const Referrals = () => {
 	const { t } = useTranslation("common");
@@ -29,7 +29,7 @@ const Referrals = () => {
 	const [activeSlide, setActiveSlide] = useState(0);
 	const [stats, setStats] = useState({});
 
-	const getShareLink = () => `https://t.me/share/url?url=https://t.me/${process.env.BOT_USER_NAME}?start=${usersRefLink}&text=${textForDm}`;
+	const getShareLink = () => `https://t.me/share/url?url=https://t.me/${process.env.BOT_USER_NAME}?start=r-${usersRefLink}&text=${textForDm}`;
 
 	const fetchStats = async () => {
 		try {
