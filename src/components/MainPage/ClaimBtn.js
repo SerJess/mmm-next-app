@@ -53,7 +53,7 @@ const ClaimBtn = () => {
 		if (!+points || exited) {
 			return setIsAvailAbleToClaim(false);
 		}
-		return setIsAvailAbleToClaim(false);
+		return setIsAvailAbleToClaim(true);
 	};
 
 	useEffect(() => {
