@@ -9,6 +9,8 @@ import Image from "next/image";
 import { useAppSelector } from "../../redux";
 import fetchWithToken from "../../helpers/fetchWithToken";
 
+import LoaderResponsive from "../SingleComponents/LoaderResponsive";
+
 import successImg from "../../assets/img/MainPage/settings/success.png";
 
 import "../../assets/scss/MainPage/AccessModal.scss";
@@ -19,6 +21,7 @@ const AccessModal = ({ closeModal }) => {
 	const currentWalletAddress = useAppSelector((state) => state.main.user.walletAddress);
 
 	const [isSuccess, setIsSuccess] = useState(false);
+	const [isWaitConfirmation, setIsWaitConfirmation] = useState(false);
 
 	const [tonConnectUI] = useTonConnectUI();
 	const newConnectedAddress = useTonAddress(false);
@@ -63,7 +66,22 @@ const AccessModal = ({ closeModal }) => {
 			return false;
 		}
 
-		setIsSuccess(true);
+		setIsWaitConfirmation(true);
+		return true;
+	};
+
+	const getIsTransactionConfirmed = async () => {
+		try {
+			// TODO
+			const { success } = await fetchWithToken("/users/wallet");
+
+			if (success) {
+				setIsSuccess(true);
+				setIsWaitConfirmation(false);
+			}
+		} catch (e) {
+			console.error(e);
+		}
 		return true;
 	};
 
@@ -81,10 +99,22 @@ const AccessModal = ({ closeModal }) => {
 		}
 	}, [newConnectedAddress]);
 
+	useEffect(() => {
+		let interval = null;
+		if (isWaitConfirmation) {
+			interval = setInterval(async () => {
+				await getIsTransactionConfirmed();
+			}, 3000);
+		}
+		return () => {
+			clearInterval(interval);
+		};
+	}, [isWaitConfirmation]);
+
 	return (
 		<Modal isOpen={true} className="custom-settings-modal access-modal" zIndex={99}>
 			<div className="settings-modal-con">
-				{!isSuccess && (
+				{!isSuccess && !isWaitConfirmation && (
 					<>
 						<p className="descr">{content.title}</p>
 						<div className="btns-con">
@@ -97,6 +127,7 @@ const AccessModal = ({ closeModal }) => {
 						</div>
 					</>
 				)}
+				{isWaitConfirmation && <LoaderResponsive />}
 				{isSuccess && (
 					<>
 						<div className="img-con">
