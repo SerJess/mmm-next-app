@@ -10,7 +10,7 @@
 				"2": "Tenser",
 				"3": "Centurion",
 				"4": "Thousandaire",
-				"5": "Temnic",
+				"5": "Myrmidon",
 				"6": "Millionaires"
 			}
 		},
@@ -35,7 +35,7 @@
 				"2": "Tenser",
 				"3": "Centurion",
 				"4": "Thousandaire",
-				"5": "Temnic",
+				"5": "Myrmidon",
 				"6": "Millionaires"
 			}
 		},
@@ -60,7 +60,7 @@
 				"2": "Tenser",
 				"3": "Centurion",
 				"4": "Thousandaire",
-				"5": "Temnic",
+				"5": "Myrmidon",
 				"6": "Millionaires"
 			}
 		},
@@ -72,13 +72,15 @@
 			"yourRef": "Your referrals",
 			"share": "Invite",
 			"close": "CLOSE",
+			"total": "Total",
+			"copied": "Link copied",
 			"levels": {
 				"0": "Freeloader",
 				"1": "Partner",
 				"2": "Tenser",
 				"3": "Centurion",
 				"4": "Thousandaire",
-				"5": "Temnic",
+				"5": "Myrmidon",
 				"6": "Millionaires"
 			}
 		},

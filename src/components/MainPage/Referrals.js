@@ -17,7 +17,6 @@ import "../../assets/scss/MainPage/Referrals.scss";
 
 const COMMON_REF = "+5 $MMM ";
 const PREMIUM_REF = "+10 $MMM ";
-const textForDm = "Мы Можем Многое - присоединяйся.";
 
 const Referrals = () => {
 	const { t } = useTranslation("common");
@@ -29,7 +28,10 @@ const Referrals = () => {
 	const [activeSlide, setActiveSlide] = useState(0);
 	const [stats, setStats] = useState({});
 
-	const getShareLink = () => `https://t.me/share/url?url=https://t.me/${process.env.BOT_USER_NAME}?start=r-${usersRefLink}&text=${textForDm}`;
+	const copyLink = () => {
+		navigator.clipboard.writeText(`https://t.me/${process.env.BOT_USER_NAME}?start=r-${usersRefLink}`);
+		toast.success(content.copied, { toastId: "copied", autoClose: 2000 });
+	};
 
 	const fetchStats = async () => {
 		try {
@@ -117,12 +119,16 @@ const Referrals = () => {
 									<div className={`indicator-item${activeSlide === 1 ? " active" : ""}`} />
 								</div>
 							</div>
-							<a href={getShareLink()} className="bordered-green share-btn">
+							<div onClick={copyLink} className="bordered-green share-btn">
 								{content.share}
-							</a>
+							</div>
 						</div>
 						<div className="bordered-white ref-list">
 							<p className="title">{content.yourRef}</p>
+							<div className="stat-item">
+								<div>{content.total}</div>
+								<div className="diff-color">{Object.values(stats)?.reduce((acc, val) => acc + (val || 0), 0) || 0}</div>
+							</div>
 							{Object.keys(content.levels)
 								.reverse()
 								.map((levelKey, i) => (

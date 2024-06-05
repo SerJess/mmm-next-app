@@ -11,7 +11,6 @@ import fetchWithToken from "../../helpers/fetchWithToken";
 import LoaderResponsive from "../SingleComponents/LoaderResponsive";
 
 import leaderboardImg from "../../assets/img/MainPage/leaderboard.png";
-import referralsGreenImg from "../../assets/img/MainPage/referralsGreen.png";
 import tableBigImg from "../../assets/img/MainPage/tableBig.png";
 import userImg from "../../assets/img/MainPage/user.png";
 
@@ -78,7 +77,7 @@ const Leaderboard = () => {
 	useEffect(() => {
 		fetchLeaderboard();
 		const timer = setInterval(() => {
-			setActiveSlide((prevState) => (prevState + 1) % 3);
+			setActiveSlide((prevState) => (prevState + 1) % 2);
 		}, 4000);
 
 		return () => {
@@ -107,17 +106,6 @@ const Leaderboard = () => {
 								<Carousel activeIndex={activeSlide} next={() => {}} previous={() => {}} className="ref-slider">
 									<CarouselItem className="custom-tag" tag="div">
 										<div className="stats-item">
-											<div className="descr">{content.referrals}</div>
-											<div className="descr">
-												<div className="icon-con">
-													<Image src={referralsGreenImg} alt={""} width={25} height={25} />
-												</div>
-												{user.referrals}
-											</div>
-										</div>
-									</CarouselItem>
-									<CarouselItem className="custom-tag" tag="div">
-										<div className="stats-item">
 											<div className="descr">{content.amount}</div>
 											<div className="descr">{decimalAdjust(+user.balance / 10000, 4)}</div>
 										</div>
@@ -132,7 +120,6 @@ const Leaderboard = () => {
 								<div className="carousel-indiacation-con">
 									<div className={`indicator-item${activeSlide === 0 ? " active" : ""}`} />
 									<div className={`indicator-item${activeSlide === 1 ? " active" : ""}`} />
-									<div className={`indicator-item${activeSlide === 2 ? " active" : ""}`} />
 								</div>
 							</div>
 						</div>
