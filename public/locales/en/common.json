@@ -2,8 +2,8 @@
 	"content": {
 		"stats": {
 			"yourStatus": "Your status: ",
-			"toDrops": "Until dividends: ",
-			"perHour": "mavros/hour",
+			"toDrops": "Until payout: ",
+			"perHour": "MAVR/hr",
 			"levels": {
 				"0": "Freeloader",
 				"1": "Partner",
@@ -15,10 +15,10 @@
 			}
 		},
 		"claim": {
-			"claimNow": "WITHDRAW IN $MMM",
+			"claimNow": "WITHDRAW TO $MMM",
 			"claimUnavailable": "WITHDRAWAL UNAVAILABLE",
 			"confirmation": "Are you sure you want to withdraw?",
-			"descr": "You are leaving the pyramid and stop receiving mavros. Rate: 1000 mavros = 0.1 MMM",
+			"descr": "You are leaving the pyramid and stop receiving mavros. Rate: 1000 MAVR = 0.1 MMM",
 			"yes": "WITHDRAW",
 			"no": "CANCEL"
 		},
@@ -106,8 +106,8 @@
 			"continue": "CONTINUE"
 		},
 		"popUps": {
-			"boost": "Congratulations! You received 2x mavros/hour.",
-			"freePoints": "Congratulations! You received 10 mavros.",
+			"boost": "Congratulations! You received 2x MAVR/hour.",
+			"freePoints": "Congratulations! You received 10 MAVR.",
 			"convert": "Mavros successfully converted to $MMM."
 		},
 		"tv": {

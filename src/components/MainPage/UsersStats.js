@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Carousel, CarouselItem } from "reactstrap";
 import Image from "next/image";
 import Countdown, { zeroPad } from "react-countdown";
@@ -6,9 +6,10 @@ import { useTranslation } from "next-i18next";
 import dayjs from "dayjs";
 import CountUp from "react-countup";
 
-import { useAppSelector } from "../../redux";
+import { useAppDispatch, useAppSelector } from "../../redux";
 import decimalAdjust from "../../helpers/decimalAdjust";
 import easingFunc from "../../helpers/easingFunc";
+import { setUser } from "../../redux/slices/main";
 
 import level1Img from "../../assets/img/MainPage/tables/level1.png";
 import level2Img from "../../assets/img/MainPage/tables/level2.png";
@@ -31,18 +32,35 @@ const imagesByLevel = {
 };
 
 const UsersStats = () => {
+	const dispatch = useAppDispatch();
 	const { t } = useTranslation("common");
 	const content = t("content.stats", { returnObjects: true });
+
+	const timerRef = useRef();
 
 	const referralLevel = useAppSelector((state) => state.main.user.referralLevel);
 	const balance = useAppSelector((state) => state.main.user.points);
 	const income = useAppSelector((state) => state.main.user.income);
 	const isBoosted = useAppSelector((state) => state.main.user.usedBoost);
+	const isExited = useAppSelector((state) => state.main.user.exited);
+
+	const [hourEnd, setHourEnd] = useState(dayjs().endOf("hour").toDate());
 
 	const level = +Object.keys(imagesByLevel).indexOf(`${referralLevel}`);
 
 	const score = decimalAdjust(+balance / 100, 4);
 	const perHour = decimalAdjust(+income / 100, 4);
+
+	const onTimerEnd = () => {
+		if (!isExited) {
+			dispatch(setUser({ points: +income + +balance }));
+		}
+
+		setHourEnd(dayjs().endOf("hour").toDate());
+		if (timerRef.current) {
+			timerRef.current.api.start();
+		}
+	};
 
 	return (
 		<div className="stats-carousel-by-level">
@@ -63,12 +81,14 @@ const UsersStats = () => {
 					<span className="diff-color">{content.levels[level]}</span>
 				</div>
 				<div className="score-con">
-					<CountUp preserveValue end={score} separator={""} easingFn={easingFunc} duration={1} />
+					<CountUp decimals={`${+score}`.split(".")[1]?.length || 0} preserveValue end={score} separator={""} easingFn={easingFunc} duration={1} />
 				</div>
 				<div className="timer-con">
 					{content.toDrops}
 					<Countdown
-						date={dayjs().endOf("hour").toDate()}
+						ref={timerRef}
+						date={hourEnd}
+						onComplete={onTimerEnd}
 						zeroPadTime={2}
 						daysInHours={true}
 						renderer={({ formatted: { minutes, seconds } }) => (
