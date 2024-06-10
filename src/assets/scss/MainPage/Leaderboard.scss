@@ -45,16 +45,13 @@
 					margin-bottom: 8px;
 
 					.carousel-wrapper {
-						display: flex;
-						flex-direction: column;
-						align-items: center;
 						width: 100%;
 
 						.ref-slider {
 							width: 100%;
 						}
 
-						.stats-item {
+						.stats-item-wrapepr {
 							margin: 0 auto 8px;
 							padding: 0 14px;
 							display: flex;
@@ -82,10 +79,11 @@
 						}
 					}
 
-					.carousel-indiacation-con {
+					.slick-dots {
+						padding-top: 8px;
+						position: static;
 						display: flex;
 						justify-content: center;
-						margin-top: 8px;
 
 						.indicator-item {
 							width: 8px;
@@ -99,7 +97,7 @@
 								margin-right: 0;
 							}
 
-							&.active {
+							&.slick-active {
 								background-color: #009a02;
 							}
 						}
@@ -118,6 +116,13 @@
 						overflow: auto;
 						margin-bottom: 8px;
 						border-bottom: 1px solid black;
+
+						&::-webkit-scrollbar {
+							display: none;
+						}
+
+						-ms-overflow-style: none;
+						scrollbar-width: none;
 
 						.title {
 							display: flex;
@@ -155,6 +160,8 @@
 
 							.name {
 								word-break: break-word;
+								line-height: 1.1;
+								margin-top: auto;
 
 								.level {
 									font-size: 12px;

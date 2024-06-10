@@ -18,7 +18,8 @@
 			"claimNow": "WITHDRAW TO $MMM",
 			"claimUnavailable": "WITHDRAWAL UNAVAILABLE",
 			"confirmation": "Are you sure you want to withdraw?",
-			"descr": "You are leaving the pyramid and stop receiving mavros. Rate: 1000 MAVR = 0.1 MMM",
+			"descr1": "You are leaving the pyramid and stop receiving mavros. Rate: ",
+			"descr": " MAVR = 0.1 MMM",
 			"yes": "WITHDRAW",
 			"no": "CANCEL"
 		},
@@ -108,7 +109,10 @@
 		"popUps": {
 			"boost": "Congratulations! You received 2x MAVR/hour.",
 			"freePoints": "Congratulations! You received 10 MAVR.",
-			"convert": "Mavros successfully converted to $MMM."
+			"convert": "Mavros successfully converted to $MMM. Dividends are no longer accrued.",
+			"exited": "⚠\uFE0F Attention! All funds have been converted. Dividends are no longer accrued. ⚠\uFE0F",
+			"timeout": "Attention! 5 minutes before the end of the hour, any operations are blocked. Please wait until the next hour to continue."
+
 		},
 		"tv": {
 			"mavr": "MAVR"

@@ -52,51 +52,45 @@
 					}
 
 					.carousel-wrapper {
-						display: flex;
-						flex-direction: column;
-						align-items: center;
 						margin-bottom: 15px;
 						width: 100%;
 
-						.ref-slider {
-							width: 100%;
+						.referral-item-wrapepr {
+							display: flex;
+							justify-content: center;
+							margin-bottom: 29px;
 
-							.referral-item {
-								display: flex;
-								justify-content: center;
-								margin-bottom: 29px;
+							&:last-child {
+								margin-bottom: 0;
+							}
 
-								&:last-child {
-									margin-bottom: 0;
+							.img-con {
+								width: 32px;
+								min-width: 32px;
+								height: 32px;
+								border-radius: 50%;
+								overflow: hidden;
+								margin-right: 8px;
+							}
+
+							.descr-con {
+								.descr-main {
+									font-size: 20px;
+									line-height: 24.7px;
 								}
 
-								.img-con {
-									width: 32px;
-									min-width: 32px;
-									height: 32px;
-									border-radius: 50%;
-									overflow: hidden;
-									margin-right: 8px;
-								}
-
-								.descr-con {
-									.descr-main {
-										font-size: 20px;
-										line-height: 24.7px;
-									}
-
-									.descr {
-										font-size: 16px;
-										line-height: 19.76px;
-									}
+								.descr {
+									font-size: 16px;
+									line-height: 19.76px;
 								}
 							}
 						}
 
-						.carousel-indiacation-con {
+						.slick-dots {
+							padding-top: 8px;
+							position: static;
 							display: flex;
 							justify-content: center;
-							margin-top: 8px;
 
 							.indicator-item {
 								width: 8px;
@@ -110,7 +104,7 @@
 									margin-right: 0;
 								}
 
-								&.active {
+								&.slick-active {
 									background-color: #009a02;
 								}
 							}

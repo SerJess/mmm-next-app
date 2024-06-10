@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { toast } from "react-toastify";
-import { Carousel, CarouselItem } from "reactstrap";
+import Slider from "react-slick";
 
 import LoaderResponsive from "../SingleComponents/LoaderResponsive";
 import { useAppSelector } from "../../redux";
@@ -15,8 +15,8 @@ import premiumImg from "../../assets/img/MainPage/settings/premium.png";
 
 import "../../assets/scss/MainPage/Referrals.scss";
 
-const COMMON_REF = "+5 $MMM ";
-const PREMIUM_REF = "+10 $MMM ";
+const COMMON_REF = `+${process.env.REWARD_MMM_BY_FREN} $MMM `;
+const PREMIUM_REF = `+${process.env.REWARD_MMM_BY_PREMIUM_FREN} $MMM `;
 
 const Referrals = () => {
 	const { t } = useTranslation("common");
@@ -25,7 +25,6 @@ const Referrals = () => {
 	const usersRefLink = useAppSelector((state) => state.main.user.referralCode);
 
 	const [isLoading, setIsLoading] = useState(true);
-	const [activeSlide, setActiveSlide] = useState(0);
 	const [stats, setStats] = useState({});
 
 	const copyLink = () => {
@@ -52,16 +51,6 @@ const Referrals = () => {
 	};
 
 	useEffect(() => {
-		const timer = setInterval(() => {
-			setActiveSlide((prevState) => (prevState + 1) % 2);
-		}, 4000);
-
-		return () => {
-			clearInterval(timer);
-		};
-	}, []);
-
-	useEffect(() => {
 		fetchStats();
 	}, []);
 
@@ -84,9 +73,23 @@ const Referrals = () => {
 						<div className="bordered-white referral-stats-con">
 							<p className="title">{content.title}</p>
 							<div className="carousel-wrapper">
-								<Carousel activeIndex={activeSlide} next={() => {}} previous={() => {}} className="ref-slider">
-									<CarouselItem className="custom-tag" tag="div">
-										<div className="referral-item">
+								<Slider
+									className="ch-slider" // ref-slider
+									dotsClass="slick-dots"
+									arrows={false}
+									autoplay={true}
+									autoplaySpeed={4000}
+									dots={true}
+									appendDots={(dots) => (
+										<div className="carousel-indiacation-con">
+											{dots.map(({ props: dotProps }, i) => (
+												<div key={`slick-dot${i}`} className={`indicator-item ${dotProps.className}`} />
+											))}
+										</div>
+									)}
+								>
+									<div className="referral-item">
+										<div className="referral-item-wrapepr">
 											<div className="img-con">
 												<Image src={friendImg} alt={""} width={32} height={32} />
 											</div>
@@ -98,9 +101,9 @@ const Referrals = () => {
 												</p>
 											</div>
 										</div>
-									</CarouselItem>
-									<CarouselItem className="custom-tag" tag="div">
-										<div className="referral-item">
+									</div>
+									<div className="referral-item">
+										<div className="referral-item-wrapepr">
 											<div className="img-con">
 												<Image src={premiumImg} alt={""} width={32} height={32} />
 											</div>
@@ -112,12 +115,8 @@ const Referrals = () => {
 												</p>
 											</div>
 										</div>
-									</CarouselItem>
-								</Carousel>
-								<div className="carousel-indiacation-con">
-									<div className={`indicator-item${activeSlide === 0 ? " active" : ""}`} />
-									<div className={`indicator-item${activeSlide === 1 ? " active" : ""}`} />
-								</div>
+									</div>
+								</Slider>
 							</div>
 							<div onClick={copyLink} className="bordered-green share-btn">
 								{content.share}

@@ -17,6 +17,8 @@ import { TelegramProvider } from "../components/NextComponets/TelegramProvider";
 
 import "../assets/scss/main.scss";
 import "react-toastify/dist/ReactToastify.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 class WebApp extends App {
 	constructor(props) {
@@ -49,9 +51,10 @@ class WebApp extends App {
 	render() {
 		const { Component, pageProps, initialReduxState, clientSideDispatches } = this.props;
 		const { isLoading } = this.state;
+
 		return (
 			<TelegramProvider>
-				<TonConnectUIProvider manifestUrl={"https://mmmtest.fruttech.ru/tonconnect-manifest.json"}>
+				<TonConnectUIProvider manifestUrl={process.env.TON_MANIFEST_URL}>
 					<StoreProvider initialReduxState={initialReduxState} clientSideDispatches={clientSideDispatches}>
 						<div id="next-app">
 							{isLoading && <Loader />}

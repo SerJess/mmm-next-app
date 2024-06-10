@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
-import { Carousel, CarouselItem } from "reactstrap";
+import Slider from "react-slick";
 
 import { useAppSelector } from "../../redux";
 
@@ -26,7 +26,6 @@ const Leaderboard = () => {
 	const [users, setUsers] = useState([]);
 	const [user, setUser] = useState([]);
 	const [totalUsers, setTotalUsers] = useState(0);
-	const [activeSlide, setActiveSlide] = useState(0);
 
 	const fetchLeaderboard = async () => {
 		try {
@@ -76,13 +75,6 @@ const Leaderboard = () => {
 
 	useEffect(() => {
 		fetchLeaderboard();
-		const timer = setInterval(() => {
-			setActiveSlide((prevState) => (prevState + 1) % 2);
-		}, 4000);
-
-		return () => {
-			clearInterval(timer);
-		};
 	}, []);
 
 	return (
@@ -103,24 +95,34 @@ const Leaderboard = () => {
 						</div>
 						<div className="bordered-white referral-stats-con">
 							<div className="carousel-wrapper">
-								<Carousel activeIndex={activeSlide} next={() => {}} previous={() => {}} className="ref-slider">
-									<CarouselItem className="custom-tag" tag="div">
-										<div className="stats-item">
+								<Slider
+									className="ch-slider" // ref-slider
+									dotsClass="slick-dots"
+									dots={true}
+									arrows={false}
+									autoplay={true}
+									autoplaySpeed={4000}
+									appendDots={(dots) => (
+										<div className="carousel-indiacation-con">
+											{dots.map(({ props: dotProps }, i) => (
+												<div key={`slick-dot${i}`} className={`indicator-item ${dotProps.className}`} />
+											))}
+										</div>
+									)}
+								>
+									<div className="stats-item">
+										<div className="stats-item-wrapepr">
 											<div className="descr">{content.amount}</div>
 											<div className="descr">{decimalAdjust(+user.balance / 10000, 4)}</div>
 										</div>
-									</CarouselItem>
-									<CarouselItem className="custom-tag" tag="div">
-										<div className="stats-item">
+									</div>
+									<div className="stats-item">
+										<div className="stats-item-wrapepr">
 											<div className="descr">{content.totalUsers}</div>
 											<div className="descr">{totalUsers}</div>
 										</div>
-									</CarouselItem>
-								</Carousel>
-								<div className="carousel-indiacation-con">
-									<div className={`indicator-item${activeSlide === 0 ? " active" : ""}`} />
-									<div className={`indicator-item${activeSlide === 1 ? " active" : ""}`} />
-								</div>
+									</div>
+								</Slider>
 							</div>
 						</div>
 						<div className="bordered-white users-list">

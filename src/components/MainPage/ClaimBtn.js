@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "reactstrap";
 import { useTranslation } from "next-i18next";
 import { toast } from "react-toastify";
+import Countdown, { zeroPad } from "react-countdown";
+import dayjs from "dayjs";
 
 import { setUser } from "../../redux/slices/main";
 import { useAppDispatch, useAppSelector } from "../../redux";
@@ -21,6 +23,7 @@ const ClaimBtn = () => {
 
 	const [isConfirmModal, setIsConfirmModal] = useState(false);
 	const [isAvailAbleToClaim, setIsAvailAbleToClaim] = useState(false);
+	const [isLastMinutesLock, setIsLastMinutesLock] = useState(false);
 
 	const postClaim = async () => {
 		if (!isAvailAbleToClaim) {
@@ -45,9 +48,20 @@ const ClaimBtn = () => {
 		return false;
 	};
 
+	const onClaimClick = () => {
+		if (isAvailAbleToClaim) {
+			return setIsConfirmModal(true);
+		}
+		if (exited || !+points) {
+			return toast.warn(popUps.exited, { toastId: "exited", autoClose: 2000 });
+		}
+		return toast.warn(popUps.timeout, { toastId: "timeout", autoClose: 2000 });
+	};
+
 	const checkAvailAbleToClaim = () => {
 		const isLastMinutes = new Date().getMinutes() > 55;
 		if (isLastMinutes) {
+			setIsLastMinutesLock(true);
 			return setIsAvailAbleToClaim(false);
 		}
 		if (!+points || exited) {
@@ -68,14 +82,35 @@ const ClaimBtn = () => {
 	return (
 		<>
 			<div className="claim-btn-con">
-				<div className={`claim-btn${isAvailAbleToClaim ? "" : " disabled"}`} onClick={() => setIsConfirmModal(true)}>
+				<div className="timer-con">
+					{isLastMinutesLock && (
+						<>
+							<p className="descr">Оставшееся время до разблокировки:</p>
+							<Countdown
+								date={dayjs().endOf("hour").toDate().getTime()}
+								onComplete={() => setIsLastMinutesLock(false)}
+								zeroPadTime={2}
+								renderer={({ formatted: { minutes, seconds } }) => (
+									<div className="diff-color">
+										{zeroPad(minutes)}:{zeroPad(seconds)}
+									</div>
+								)}
+							/>
+						</>
+					)}
+				</div>
+				<div className={`claim-btn${isAvailAbleToClaim ? "" : " disabled"}`} onClick={onClaimClick}>
 					{isAvailAbleToClaim ? content.claimNow : content.claimUnavailable}
 				</div>
 			</div>
 			<Modal isOpen={isConfirmModal} className="claim-confirmation-modal">
 				<div className="claim-confirmation-con">
 					<p className="descr">{content.confirmation}</p>
-					<p className="sub-descr">{content.descr}</p>
+					<p className="sub-descr">
+						{content.descr1}
+						{process.env.RATE_MAVR_TO_01_MMM}
+						{content.descr2}
+					</p>
 					<div className="btns-con">
 						<div className={`btn-item confirm-btn${isAvailAbleToClaim ? "" : " disabled"}`} onClick={postClaim}>
 							{content.yes}

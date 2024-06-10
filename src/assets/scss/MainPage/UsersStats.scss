@@ -2,7 +2,7 @@
 	.stats-carousel-by-level {
 		position: relative;
 		display: flex;
-		margin-bottom: 20px;
+		margin-bottom: 10px;
 		margin-top: -10px;
 		width: 75%;
 		max-width: 600px;
@@ -26,11 +26,15 @@
 			color: #dedede;
 
 			.level-con {
+				padding: 2px 12px;
 				margin-bottom: 8px;
-				font-size: 20px;
+				font-size: 16px;
 				font-weight: 400;
 				line-height: 1;
+				color: #444;
 				text-shadow: 0 4px 4px #00000040;
+				border-radius: 4px;
+				border: 1px solid #b1b1b1;
 			}
 
 			.score-con {
@@ -49,11 +53,15 @@
 			}
 
 			.timer-con {
+				padding: 2px 12px;
 				margin-bottom: 5px;
 				display: flex;
 				font-size: 16px;
 				line-height: 1;
 				text-shadow: 0 4px 4px #00000040;
+				color: #444;
+				border-radius: 4px;
+				border: 1px solid #b1b1b1;
 
 				.diff-color {
 					margin-left: 5px;
@@ -61,9 +69,13 @@
 			}
 
 			.per-hour {
-				font-size: 20px;
+				padding: 2px 12px;
+				font-size: 16px;
 				line-height: 1;
 				text-shadow: 0 4px 4px #00000040;
+				color: #444;
+				border-radius: 4px;
+				border: 1px solid #b1b1b1;
 			}
 
 			.diff-color {

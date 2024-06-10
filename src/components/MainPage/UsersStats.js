@@ -76,14 +76,14 @@ const UsersStats = () => {
 				</Carousel>
 			</div>
 			<div className="users-stats-con">
-				<div className="level-con">
+				<div className="bordered-white level-con">
 					{content.yourStatus}
 					<span className="diff-color">{content.levels[level]}</span>
 				</div>
 				<div className="score-con">
 					<CountUp decimals={`${+score}`.split(".")[1]?.length || 0} preserveValue end={score} separator={""} easingFn={easingFunc} duration={1} />
 				</div>
-				<div className="timer-con">
+				<div className="bordered-white timer-con">
 					{content.toDrops}
 					<Countdown
 						ref={timerRef}
@@ -98,7 +98,7 @@ const UsersStats = () => {
 						)}
 					/>
 				</div>
-				<div className="per-hour">
+				<div className="bordered-white per-hour">
 					<span className="diff-color">
 						{perHour}
 						{isBoosted && " x 2"}
